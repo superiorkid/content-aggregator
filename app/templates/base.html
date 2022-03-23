@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% if title %}
+  <title>{{ title }} - News Aggregator</title>
+  {% else %}
+  <title>News Aggregator</title>
+  {% endif %}
+
+  <title>Document</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/offcanvas.css') }}">
+  {{ bootstrap.load_css() }}
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+</head>
+<body class="bg-light">
+  {% include 'partials/__nav.html' %}
+
+  {% block content %}
+  {% endblock %}
+
+  {% include 'partials/__footer.html' %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/offcanvas.js') }}"></script>
+
+</body>
+</html>
+
+
