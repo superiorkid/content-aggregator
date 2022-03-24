@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   {% if title %}
-  <title>{{ title }} - News Aggregator</title>
+  <title>{{ title }} - FakeGregator</title>
   {% else %}
-  <title>News Aggregator</title>
+  <title>FakeGregator</title>
   {% endif %}
 
   <title>Document</title>
-
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/web-icon.png') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/offcanvas.css') }}">
   {{ bootstrap.load_css() }}
 
