@@ -1,6 +1,9 @@
 import feedparser
 import dateutil.parser
 
+from prettyprinter import pprint
+
+
 class BlogFeed:
 
   def __init__(self):
@@ -13,11 +16,11 @@ class BlogFeed:
     }
 
     self.__opensource = {
-      "https://www.cyberciti.biz/feed/",
-      "https://itsfoss.com/feed/",
-      "https://linuxhint.com/feed/",
-      "https://ostechnix.com/feed/",
-      "https://www.fosslinux.com/feed"
+      "https://www.geeksforgeeks.org/feed/",
+      "http://feeds.feedburner.com/CssTricks",
+      "http://feeds.dzone.com/home",
+      "https://sdtimes.com/feed/",
+      "https://scand.com/company/blog/feed/"
     }
 
   @property
@@ -42,13 +45,12 @@ class BlogFeed:
 
     feeds = [feed.entries for feed in blog]
     feed = [item for feed in feeds for item in feed]
-    feed.sort(key=lambda x: dateutil.parser.parse(x.['published']), reverse=True)
+    feed.sort(key=lambda x: dateutil.parser.parse(x['published']), reverse=True)
 
     res = [{'title': i['title'], 'date': i['published'], 'link': i['link']} for i in feed[:6]]
 
-    return
+    return temp
 
 
 feed1 = BlogFeed()
-print(feed1.all_feed())
-
+pprint(feed1.all_feed())

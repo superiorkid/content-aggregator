@@ -1,11 +1,14 @@
 Bootstrap-Flask==2.0.2
 click==8.0.4
+colorful==0.5.4
 feedparser==6.0.8
 Flask==2.0.3
 gunicorn==20.1.0
 itsdangerous==2.1.1
 Jinja2==3.0.3
 MarkupSafe==2.1.1
+prettyprinter==0.18.0
+Pygments==2.11.2
 python-dateutil==2.8.2
 python-dotenv==0.19.2
 sgmllib3k==1.0.0
