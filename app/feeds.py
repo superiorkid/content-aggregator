@@ -4,6 +4,7 @@ import re
 
 from datetime import datetime
 from dateutil import tz
+from prettyprinter import pprint
 
 class BlogFeeds(object):
 
@@ -11,7 +12,6 @@ class BlogFeeds(object):
     self.__programming = {
       "https://www.geeksforgeeks.org/feed/",
       "http://feeds.feedburner.com/CssTricks",
-      # "https://sdtimes.com/feed/",
       "https://scand.com/company/blog/feed/"
     }
     self.__opensource = {
@@ -52,13 +52,9 @@ class BlogFeeds(object):
     blog_img = ''
     blog = [feedparser.parse(url) for url in blog_url]
 
-    for i in blog:
-      if 'image' in i.feed:
-        blog_img = i.feed.image.href
-      else:
-        blog_img = None
 
-    articles = [{'blog_title': feeds.feed.title, 'blog_img': blog_img, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
+
+    articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
     articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)[:10]
 
     return articles_sorted
@@ -70,13 +66,13 @@ class BlogFeeds(object):
     blog_img = ''
     blog = [feedparser.parse(url) for url in url]
 
-    for i in blog:
-      if 'image' in i.feed:
-        blog_img = i.feed.image.href
-      else:
-        blog_img = None
+    # for i in blog:
+    #   if 'image' in i.feed:
+    #     blog_img = i.feed.image.href
+    #   else:
+    #     blog_img = None
 
-    articles = [{'blog_title': feeds.feed.title, 'blog_img': blog_img, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
+    articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
     articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
 
     return articles_sorted
@@ -88,13 +84,15 @@ class BlogFeeds(object):
     blog_img = ''
     blog = [feedparser.parse(url) for url in url]
 
-    for i in blog:
-      if 'image' in i.feed:
-        blog_img = i.feed.image.href
-      else:
-        blog_img = None
+    # for i in blog:
+    #   if 'image' in i.feed:
+    #     blog_img = i.feed.image.href
+    #   else:
+    #     blog_img = None
 
-    articles = [{'blog_title': feeds.feed.title, 'blog_img': blog_img, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
+    articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
     articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
 
     return articles_sorted
+
+
