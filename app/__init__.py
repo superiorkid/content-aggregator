@@ -6,6 +6,10 @@ bootstrap = Bootstrap5()
 moment = Moment()
 
 def create_app():
+  """
+  Create an app instance and register the blueprints
+  :return: The app object.
+  """
   app = Flask(__name__)
 
   bootstrap.init_app(app)
