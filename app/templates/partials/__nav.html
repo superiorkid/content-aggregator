@@ -9,10 +9,10 @@
       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{ url_for('feed.front_view') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Programming</a>
+            <a class="nav-link" href="{{ url_for('feed.programming') }}">Programming</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Open Source</a>
