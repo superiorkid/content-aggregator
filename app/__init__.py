@@ -1,9 +1,17 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_moment import Moment
 
 bootstrap = Bootstrap5()
 moment = Moment()
+
+def page_not_found(e):
+  return render_template('error/404.html'), 404
+
+
+def internal_server_error(e):
+  return render_template('error/500.html'), 500
+
 
 def create_app():
   """
@@ -21,5 +29,9 @@ def create_app():
 
   app.register_blueprint(feed_blueprint, url_prefix='/feed')
   app.register_blueprint(main_blueprint)
+
+  # error handling
+  app.register_error_handler(404, page_not_found)
+  app.register_error_handler(500, internal_server_error)
 
   return app
