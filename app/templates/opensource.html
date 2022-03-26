@@ -15,7 +15,7 @@
       <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
         <div class="d-flex justify-content-between">
           <strong class="text-gray-dark">{{ item.title }} | <b><i>{{ item.blog_title}}</i></b></strong>
-          <span><strong>Posted:</strong> 15 minute ago</span>
+          <span><strong>Posted:</strong>{{ moment(item.date).fromNow() }}</span>
         </div>
         <span class="d-block">{{ item.summary[:150] }}...</span>
         <a href="{{ item.link }}">Reading &raquo;</a>

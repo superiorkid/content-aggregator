@@ -15,7 +15,7 @@ def create_app():
   from .feed import feed as feed_blueprint
   from .main import main as main_blueprint
 
-  app.register_blueprint(feed_blueprint, url_prefix='/blog')
+  app.register_blueprint(feed_blueprint, url_prefix='/feed')
   app.register_blueprint(main_blueprint)
 
   return app
