@@ -14,8 +14,9 @@ def front_view():
 
   data = blog.all_feeds()
   programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
 
-  return render_template('index.html',data = data, programming=programming_articles, title = 'Front view')
+  return render_template('index.html',data = data, programming=programming_articles, opensource=opensource_articles, title = 'Front view')
 
 
 
@@ -31,11 +32,14 @@ def programming():
 
 
 @feed.get('/opensource')
-def open_source():
+def opensource():
   """
     open source section
   """
-  return 'ini /blog/opensource'
+  blog= BlogFeeds()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('opensource.html', title="OpenSource", data=opensource_articles)
 
 
 @feed.get('/programming/geekforgeeks')
