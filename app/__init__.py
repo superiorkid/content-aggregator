@@ -1,12 +1,15 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap5
+from flask_moment import Moment
 
 bootstrap = Bootstrap5()
+moment = Moment()
 
 def create_app():
   app = Flask(__name__)
 
   bootstrap.init_app(app)
+  moment.init_app(app)
 
   # blueprint init
   from .feed import feed as feed_blueprint
