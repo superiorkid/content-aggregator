@@ -5,21 +5,33 @@ import re
 from datetime import datetime
 from dateutil import tz
 from prettyprinter import pprint
+from itertools import islice
 
 class BlogFeeds(object):
 
   def __init__(self):
     self.__programming = {
       "https://www.geeksforgeeks.org/feed/",
-      "http://feeds.feedburner.com/CssTricks",
-      "https://scand.com/company/blog/feed/"
+      "https://css-tricks.com/feed/",
+      "https://scand.com/company/blog/feed/",
+      "https://www.codingdojo.com/blog/feed",
+      "https://www.tutsplanet.com/feed/",
+      "https://github.blog/feed/",
+      "https://blog.jooq.org/feed/"
     }
     self.__opensource = {
       "https://www.cyberciti.biz/feed/",
       "https://itsfoss.com/feed/",
       "https://linuxhint.com/feed/",
       "https://ostechnix.com/feed/",
-      "https://www.fosslinux.com/feed"
+      "https://www.fosslinux.com/feed",
+      "https://www.linuxtechi.com/feed/",
+      "https://www.linuxandubuntu.com/",
+      "https://linuxways.net/feed/",
+      "https://www.linuxtoday.com/feed/",
+      "http://feeds.feedburner.com/Linuxbuz",
+      "https://linuxstans.com/feed/",
+      "https://linoxide.com/feed/"
     }
     self.pattern = re.compile('<.*?>')
 
@@ -66,7 +78,7 @@ class BlogFeeds(object):
     blog = [feedparser.parse(url) for url in blog_url]
 
     articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
-    articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)[:10]
+    articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)[:9]
 
     return articles_sorted
 
