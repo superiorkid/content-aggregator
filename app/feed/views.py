@@ -12,7 +12,7 @@ def front_view():
 
   blog = BlogFeeds()
 
-  data = blog.all_feeds()
+  data = blog.recent_update()
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 

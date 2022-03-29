@@ -1,37 +1,34 @@
 import feedparser
-import io
 import re
 
 from datetime import datetime
 from dateutil import tz
-from prettyprinter import pprint
-from itertools import islice
 
 class BlogFeeds(object):
 
   def __init__(self):
     self.__programming = {
       "https://www.geeksforgeeks.org/feed/",
-      "https://css-tricks.com/feed/",
-      "https://scand.com/company/blog/feed/",
-      "https://www.codingdojo.com/blog/feed",
-      "https://www.tutsplanet.com/feed/",
-      "https://github.blog/feed/",
-      "https://blog.jooq.org/feed/"
+      "https://css-tricks.com/feed/"
+      # "https://scand.com/company/blog/feed/",
+      # "https://www.codingdojo.com/blog/feed",
+      # "https://github.blog/feed/"
+      # "https://www.tutsplanet.com/feed/",
+      # "https://blog.jooq.org/feed/"
     }
     self.__opensource = {
       "https://www.cyberciti.biz/feed/",
-      "https://itsfoss.com/feed/",
-      "https://linuxhint.com/feed/",
-      "https://ostechnix.com/feed/",
-      "https://www.fosslinux.com/feed",
-      "https://www.linuxtechi.com/feed/",
-      "https://www.linuxandubuntu.com/",
-      "https://linuxways.net/feed/",
-      "https://www.linuxtoday.com/feed/",
-      "http://feeds.feedburner.com/Linuxbuz",
-      "https://linuxstans.com/feed/",
-      "https://linoxide.com/feed/"
+      "https://itsfoss.com/feed/"
+      # "https://linuxhint.com/feed/",
+      # "https://ostechnix.com/feed/",
+      # "https://www.fosslinux.com/feed"
+      # "https://www.linuxtechi.com/feed/",
+      # "https://www.linuxandubuntu.com/",
+      # "https://linuxways.net/feed/",
+      # "https://www.linuxtoday.com/feed/",
+      # "http://feeds.feedburner.com/Linuxbuz",
+      # "https://linuxstans.com/feed/",
+      # "https://linoxide.com/feed/"
     }
     self.pattern = re.compile('<.*?>')
 
@@ -63,22 +60,15 @@ class BlogFeeds(object):
     :return: A list of dictionaries.
     """
     utc = datetime.strptime(str_date, '%a, %d %b %Y %H:%M:%S +0000')
+    return utc
 
-    # convert to local timezone
-    from_zone = tz.gettz('UTC')
-    to_zone = tz.gettz('Asia/Makassar')
-    utc = utc.replace(tzinfo=from_zone)
-    central = utc.astimezone(to_zone)
-
-    return central
-
-  def all_feeds(self):
+  def recent_update(self):
     blog_url = self.opensource | self.programming
 
     blog = [feedparser.parse(url) for url in blog_url]
 
     articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
-    articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)[:9]
+    articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
 
     return articles_sorted
 
