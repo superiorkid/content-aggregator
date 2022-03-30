@@ -26,9 +26,11 @@ def create_app():
   # blueprint init
   from .feed import feed as feed_blueprint
   from .main import main as main_blueprint
+  from .scraping import scraping as scrape_blueprint
 
   app.register_blueprint(feed_blueprint, url_prefix='/feed')
   app.register_blueprint(main_blueprint)
+  app.register_blueprint(scrape_blueprint, url_prefix='/feed/detail')
 
   # error handling
   app.register_error_handler(404, page_not_found)
