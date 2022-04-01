@@ -30,7 +30,7 @@ def create_app():
 
   app.register_blueprint(feed_blueprint, url_prefix='/feed')
   app.register_blueprint(main_blueprint)
-  app.register_blueprint(scrape_blueprint, url_prefix='/feed/detail')
+  app.register_blueprint(scrape_blueprint, url_prefix='/feed/article')
 
   # error handling
   app.register_error_handler(404, page_not_found)
