@@ -17,17 +17,17 @@ class BlogFeeds(object):
       # "https://blog.jooq.org/feed/"
     }
     self.__opensource = {
-      "https://www.linuxtoday.com/feed/",
-      "https://ostechnix.com/feed/",
+      "https://linuxhint.com/feed/",
+      "https://www.fosslinux.com/feed",
       "https://itsfoss.com/feed/"
-      # "https://www.cyberciti.biz/feed/",
-      # "https://linuxhint.com/feed/",
-      # "https://www.fosslinux.com/feed"
+      # "https://linuxstans.com/feed/",
+      # "https://ostechnix.com/feed/",
+      # "https://www.linuxtoday.com/feed/",
       # "https://www.linuxtechi.com/feed/",
+      # "https://www.cyberciti.biz/feed/",
       # "https://www.linuxandubuntu.com/",
       # "https://linuxways.net/feed/",
       # "http://feeds.feedburner.com/Linuxbuz",
-      # "https://linuxstans.com/feed/",
       # "https://linoxide.com/feed/"
     }
     self.pattern = re.compile('<.*?>')

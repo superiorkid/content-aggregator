@@ -28,15 +28,24 @@ def codingdojo():
   scrape = WebScrape()
   articles = scrape.codingdojo(link)
 
-  return render_template('article/codingdojo.html', data=articles)
+  return render_template('article/codingdojo.html', data=articles, title="CodingDojo")
 
-@scraping.get('/ostechnix')
-def ostechnix():
-  pass
+@scraping.get('/fosslinux')
+def fosslinux():
+  link = request.args.get('links')
 
-@scraping.get('/linuxtoday')
-def linuxtoday():
-  pass
+  scrape = WebScrape()
+  articles = scrape.fosslinux(link)
+
+  return render_template('article/fosslinux.html', data=articles, title="FossLinux")
+
+@scraping.get('/linuxhint')
+def linuxhint():
+  link = request.args.get('links')
+  scrape = WebScrape()
+  articles = scrape.linuxhint(link)
+
+  return render_template('article/linuxhint.html', data=articles, title="Linux Hint")
 
 @scraping.get('/itsfoss')
 def itsfoss():
@@ -45,4 +54,14 @@ def itsfoss():
   scrape = WebScrape()
   articles = scrape.itsfoss(link)
 
-  return render_template('article/itsfoss.html', data=articles)
+  return render_template('article/itsfoss.html', data=articles, title="It\'s Foss")
+
+
+# @scraping.get('/ostechnix')
+# def ostechnix():
+#   link = request.args.get('links')
+
+#   scrape = WebScrape()
+#   articles = scrape.ostechnix(link)
+
+#   return render_template('article/ostechnix.html', data=articles, title="OSTechNix")
