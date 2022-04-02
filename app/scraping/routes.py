@@ -10,7 +10,7 @@ def geeksforgeeks():
   scrape = WebScrape()
   articles = scrape.geeks(link)
 
-  return render_template('article/geeks.html', data=articles)
+  return render_template('article/geeks.html', data=articles, title="GeeksForGeeks")
 
 @scraping.get('/github_blog')
 def github():
@@ -19,7 +19,7 @@ def github():
   scrape = WebScrape()
   articles = scrape.github_blog(link)
 
-  return render_template('article/github.html', data=articles)
+  return render_template('article/github.html', data=articles, title="Github")
 
 @scraping.get('/codingdojo')
 def codingdojo():

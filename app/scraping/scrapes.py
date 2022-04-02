@@ -59,7 +59,7 @@ class WebScrape:
     soup = BeautifulSoup(res.content, 'html.parser')
     articles = soup.find(class_='entry-content')
 
-    return articles.prettify()
+    return articles
 
   def ostechnix(self, url):
     pass
@@ -74,12 +74,26 @@ class WebScrape:
 
     res = requests.get(self.url)
     soup = BeautifulSoup(res.content, 'html.parser')
-    articles = soup.find(class_='entry-content')
+    body = soup.find(class_='entry-content')
 
-    return articles
+    temp = {
+      "title": soup.find(class_="entry-title").get_text(),
+      "body": body
+    }
+
+    unwanted = body.find('div', class_="ss-inline-share-wrapper")
+    unwanted.replaceWith()
+
+    for img in body.find_all('img'):
+      del img["srcset"]
+
+    for iframe in body.find_all('iframe'):
+      iframe['src'] = iframe.get('data-lazy-src')
+
+    return temp
 
 
 
 # geeksforgeeks = WebScrape()
 
-# print(geeksforgeeks.github_blog('https://github.blog/2022-03-31-how-github-does-take-home-technical-interviews/'))
+# print(geeksforgeeks.itsfoss('https://itsfoss.com/accent-color-ubuntu/'))
