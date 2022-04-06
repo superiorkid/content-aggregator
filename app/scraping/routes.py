@@ -19,12 +19,16 @@ def geeksforgeeks():
 
 @scraping.get('/github_blog')
 def github():
+  blog = BlogFeeds()
   link = request.args.get('links')
 
   scrape = WebScrape()
   articles = scrape.github_blog(link)
 
-  return render_template('article/github.html', data=articles, title="Github")
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('article/github.html', data=articles, title="Github",programming=programming_articles, opensource=opensource_articles)
 
 @scraping.get('/codingdojo')
 def codingdojo():

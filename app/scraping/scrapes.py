@@ -21,9 +21,9 @@ class WebScrape:
     }
 
     # remove empty tag
-    for x in soup.find_all():
-      if len(x.get_text(strip=True)) == 0 and x.name not in ['div', 'img', 'br']:
-          x.extract()
+    # for x in soup.find_all():
+    #   if len(x.get_text(strip=True)) == 0 and x.name not in ['div', 'br', 'img']:
+    #       x.extract()
 
     # remove inline style
     for tag in soup():
@@ -49,6 +49,9 @@ class WebScrape:
       "title": soup.find(class_='post-hero').find('h1').get_text(),
       "body": body
     }
+
+    soup.find(class_="post__content")['class'].remove('col-lg-7')
+    soup.find(class_="post__content")['class'].remove('col-md-8')
 
     unwanted = body.find('div', class_="f5-mktg")
     unwanted.replaceWith('')
