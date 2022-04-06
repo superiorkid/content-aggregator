@@ -53,6 +53,11 @@ class WebScrape:
     soup.find(class_="post__content")['class'].remove('col-lg-7')
     soup.find(class_="post__content")['class'].remove('col-md-8')
 
+    # remove inline style
+    for tag in soup():
+      for attr in ['style', 'name']:
+        del tag[attr]
+
     unwanted = body.find('div', class_="f5-mktg")
     unwanted.replaceWith('')
 
