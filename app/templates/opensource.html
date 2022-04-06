@@ -17,7 +17,8 @@
           <span><strong>Posted:</strong>{{ moment(item.date).fromNow() }}</span>
         </div>
         <span class="d-block">{{ item.summary[:150] }}...</span>
-        <a href="{{ item.link }}">Read &raquo;</a>
+        {% include 'partials/blog_choices.html' %}
+
       </div>
     </div>
     {% endfor %}

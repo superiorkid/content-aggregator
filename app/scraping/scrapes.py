@@ -25,6 +25,11 @@ class WebScrape:
       if len(x.get_text(strip=True)) == 0 and x.name not in ['div', 'img', 'br']:
           x.extract()
 
+    # remove inline style
+    for tag in soup():
+      for attr in ['style', 'name']:
+        del tag[attr]
+
     unwanted = body.find(id='personalNoteDiv')
     unwanted.replaceWith('')
 

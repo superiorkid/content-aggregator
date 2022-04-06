@@ -1,16 +1,21 @@
 from . import scraping
 from flask import render_template, request
 from .scrapes import WebScrape
+from app.feeds import BlogFeeds
 
 @scraping.get('/geeksforgeeks')
 def geeksforgeeks():
+  blog = BlogFeeds()
 
   link = request.args.get('links')
 
   scrape = WebScrape()
   articles = scrape.geeks(link)
 
-  return render_template('article/geeks.html', data=articles, title="GeeksForGeeks")
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('article/geeks.html', data=articles, title="GeeksForGeeks", programming=programming_articles, opensource=opensource_articles)
 
 @scraping.get('/github_blog')
 def github():
