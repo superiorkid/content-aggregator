@@ -1,24 +1,25 @@
 <div class="my-3 p-3 mt-4 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">Programming</h6>
+  <h6 class="border-bottom pb-2 mb-0">Programming</h6>
 
-    {% for item in programming[:3] %}
-    <div class="d-flex text-muted pt-3">
-      <img src="{{item.blog_img}}" alt="Bootstrap" width="42" height="42" class="rounded-circle border border-white bd-placeholder-img flex-shrink-0 me-2">
+  {% for item in programming[:3] %}
+  <div class="d-flex text-muted pt-3">
+    <img src="{{item.blog_img}}" alt="Bootstrap" width="42" height="42" class="rounded-circle border border-white bd-placeholder-img flex-shrink-0 me-2">
 
 
-      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-        <div class="d-flex justify-content-between">
-          <strong class="text-gray-dark">{{ item.title }} | <b><i>{{ item.blog_title}}</i></b></strong>
-          <span><strong>Posted:</strong>{{ moment(item.date).fromNow() }}</span>
-        </div>
-        <span class="d-block">{{item.summary[:150]}}...</span>
-        <a href="{{ item.link }}">Read &raquo;</a>
+    <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+      <div class="d-flex justify-content-between">
+        <strong class="text-gray-dark">{{ item.title }} | <b><i>{{ item.blog_title}}</i></b></strong>
       </div>
+      <p class="mt-2"><strong>Posted:</strong>{{ moment(item.date).fromNow() }}</p>
+
+      {% include 'partials/blog_choices.html' %}
+
     </div>
-
-    {% endfor %}
-
-    <small class="d-block text-end mt-3">
-      <a href="{{ url_for('feed.programming') }}">more &raquo;</a>
-    </small>
   </div>
+
+  {% endfor %}
+
+  <small class="d-block text-end mt-3">
+    <a href="{{ url_for('feed.programming') }}">more &raquo;</a>
+  </small>
+</div>

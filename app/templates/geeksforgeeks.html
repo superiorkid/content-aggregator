@@ -9,14 +9,15 @@
         <h6 class="border-bottom pb-2 mb-0">Recent update</h6>
 
         <!-- content -->
-        {% for item in data %}
+        {% for item in data.posts %}
         <div class="d-flex text-muted pt-3">
-          <img src={{ item.blog_img }} alt="{{ item.blog_title }}" width="42" height="42" class="rounded-circle me-3">
+          <img src={{ data.blog_img }} alt="{{ data.blog_title }}" width="42" height="42" class="rounded-circle me-3">
 
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
             <div class="d-flex justify-content-between">
-              <strong class="text-gray-dark">{{ item.title }} | <b><i>{{ item.blog_title}}</i></b></strong>
+              <strong class="text-gray-dark">{{ item.title }} | <b><i>{{ data.blog_title}}</i></b></strong>
               <span><strong>Posted: </strong>{{ moment(item.date).fromNow() }}</span>
+
             </div>
             <span class="d-block">{{ item.summary[:150] }} ...</span>
 

@@ -4,7 +4,7 @@ from flask import render_template
 from app.feeds import BlogFeeds
 
 
-@feed.get('/all')
+@feed.get('/explore')
 def front_view():
   """
     front view berisikan gabungan dari semua feed
@@ -16,7 +16,7 @@ def front_view():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
-  return render_template('index.html',data = data, programming=programming_articles, opensource=opensource_articles, title = 'Front view')
+  return render_template('index.html',data = data, programming=programming_articles, opensource=opensource_articles, title = 'Explore')
 
 
 
@@ -47,7 +47,87 @@ def geek_for_geeks():
   """
     geek for geeks section
   """
-  return 'ini /blog/programming/geekforgeeks'
+  blog = BlogFeeds()
+  url = blog.programming.get('geeksforgeeks')
+
+  articles = blog.individual_blog(url)
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
-# etc
+@feed.get('/programming/codingdojo')
+def codingdojo():
+  """
+    geek for geeks section
+  """
+  blog = BlogFeeds()
+  url = blog.programming.get('codingdojo')
+
+  articles = blog.individual_blog(url)
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
+
+
+@feed.get('/programming/github')
+def github():
+  """
+    geek for geeks section
+  """
+  blog = BlogFeeds()
+  url = blog.programming.get('github')
+
+  articles = blog.individual_blog(url)
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
+
+
+@feed.get('/programming/linuxhint')
+def linuxhint():
+  """
+    geek for geeks section
+  """
+  blog = BlogFeeds()
+  url = blog.opensource.get('linuxhint')
+
+  articles = blog.individual_blog(url)
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
+
+
+@feed.get('/programming/fosslinux')
+def fosslinux():
+  """
+    geek for geeks section
+  """
+  blog = BlogFeeds()
+  url = blog.opensource.get('fosslinux')
+
+  articles = blog.individual_blog(url)
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
+
+
+
+@feed.get('/programming/itsfoss')
+def itsfoss():
+  """
+    geek for geeks section
+  """
+  blog = BlogFeeds()
+  url = blog.opensource.get('itsfoss')
+
+  articles = blog.individual_blog(url)
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)

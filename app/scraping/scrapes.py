@@ -10,7 +10,7 @@ class WebScrape:
   def geeks(self, url):
     self.url = url
     res = requests.get(self.url)
-    soup = BeautifulSoup(res.content, 'lxml')
+    soup = BeautifulSoup(res.content, 'html.parser')
 
     articles = soup.article
     body = articles.find('div', class_='text')
@@ -28,8 +28,8 @@ class WebScrape:
     unwanted = body.find(id='personalNoteDiv')
     unwanted.replaceWith('')
 
-    unwanted = body.find(id='GFG_AD_Desktop_InContent_ATF_728x280')
-    unwanted.replaceWith('')
+    # unwanted = body.find(id='GFG_AD_Desktop_InContent_ATF_728x280')
+    # unwanted.replaceWith('')
     return temp
 
   def github_blog(self, url):

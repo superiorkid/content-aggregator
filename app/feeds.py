@@ -8,28 +8,16 @@ class BlogFeeds(object):
 
   def __init__(self):
     self.__programming = {
-      "https://www.geeksforgeeks.org/feed/",
-      "https://www.codingdojo.com/blog/feed",
-      "https://github.blog/feed/"
-      # "https://css-tricks.com/feed/"
-      # "https://scand.com/company/blog/feed/",
-      # "https://www.tutsplanet.com/feed/",
-      # "https://blog.jooq.org/feed/"
+      "geeksforgeeks": "https://www.geeksforgeeks.org/feed/",
+      "codingdojo": "https://www.codingdojo.com/blog/feed",
+      "github": "https://github.blog/feed/"
     }
     self.__opensource = {
-      "https://linuxhint.com/feed/",
-      "https://www.fosslinux.com/feed",
-      "https://itsfoss.com/feed/"
-      # "https://linuxstans.com/feed/",
-      # "https://ostechnix.com/feed/",
-      # "https://www.linuxtoday.com/feed/",
-      # "https://www.linuxtechi.com/feed/",
-      # "https://www.cyberciti.biz/feed/",
-      # "https://www.linuxandubuntu.com/",
-      # "https://linuxways.net/feed/",
-      # "http://feeds.feedburner.com/Linuxbuz",
-      # "https://linoxide.com/feed/"
+      "linuxhint": "https://linuxhint.com/feed/",
+      "fosslinux": "https://www.fosslinux.com/feed",
+      "itsfoss": "https://itsfoss.com/feed/"
     }
+
     self.pattern = re.compile('<.*?>')
 
   @property
@@ -65,19 +53,18 @@ class BlogFeeds(object):
   def recent_update(self):
     blog_url = self.opensource | self.programming
 
-    blog = [feedparser.parse(url) for url in blog_url]
+    blog = [feedparser.parse(url) for site, url in blog_url.items()]
 
     articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
     articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
 
-    return articles_sorted
+    return articles_sorted[:10]
 
 
   def programming_section(self):
-    url = self.programming
+    blog_url = self.programming
 
-    blog_img = ''
-    blog = [feedparser.parse(url) for url in url]
+    blog = [feedparser.parse(url) for site, url in blog_url.items()]
 
     articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
     articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
@@ -86,9 +73,9 @@ class BlogFeeds(object):
 
 
   def opensource_section(self):
-    url = self.opensource
+    blog_url = self.opensource
 
-    blog = [feedparser.parse(url) for url in url]
+    blog = [feedparser.parse(url) for site, url in blog_url.items()]
 
     articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
     articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
@@ -96,3 +83,36 @@ class BlogFeeds(object):
     return articles_sorted
 
 
+  def individual_blog(self, url):
+    blog_feed = feedparser.parse(url)
+    # getting lists of blog entries via .entries
+    posts = blog_feed.entries
+
+    # dictionary for holding posts details
+    posts_details = {"blog_title" : blog_feed.feed.title,
+                    "blog_img" : blog_feed.feed.image.href}
+
+    post_list = []
+
+    # iterating over individual posts
+    for post in posts:
+        temp = dict()
+
+        # if any post doesn't have information then throw error.
+        try:
+            temp["title"] = post.title
+            temp["summary"] = self.cleanhtml(post.summary)
+            temp['date'] = self.parse_datetime(post.published)
+            temp['link'] = post.link
+        except:
+            pass
+
+        post_list.append(temp)
+
+    # storing lists of posts in the dictionary
+    posts_details["posts"] = post_list
+
+    return posts_details # returning the details which is dictionary
+
+# blog = BlogFeeds()
+# print(blog.individual_blog('https://www.geeksforgeeks.org/feed/'))
