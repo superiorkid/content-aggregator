@@ -123,6 +123,10 @@ class WebScrape:
       "body": body
     }
 
+    for tag in soup():
+      for attr in ['style', 'name']:
+        del tag[attr]
+
     for img in body.find_all('img'):
       img['src'] = img.get('data-lazy-src')
 

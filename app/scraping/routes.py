@@ -58,11 +58,16 @@ def fosslinux():
 
 @scraping.get('/linuxhint')
 def linuxhint():
+  blog = BlogFeeds()
   link = request.args.get('links')
+
   scrape = WebScrape()
   articles = scrape.linuxhint(link)
 
-  return render_template('article/linuxhint.html', data=articles, title="Linux Hint")
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('article/linuxhint.html', data=articles, title="Linux Hint", programming=programming_articles, opensource=opensource_articles)
 
 @scraping.get('/itsfoss')
 def itsfoss():
