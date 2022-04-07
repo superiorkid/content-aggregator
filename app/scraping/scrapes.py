@@ -93,6 +93,10 @@ class WebScrape:
       "body": body
     }
 
+    for tag in soup():
+      for attr in ['style', 'name']:
+        del tag[attr]
+
     unwanted = body.find('div', class_="id_ad_content-horiz-center")
     unwanted.replaceWith()
 
@@ -103,6 +107,7 @@ class WebScrape:
       img['src'] = img.get('data-src')
 
     return temp
+
 
   def linuxhint(self, url):
     self.url = url

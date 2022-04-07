@@ -45,12 +45,16 @@ def codingdojo():
 
 @scraping.get('/fosslinux')
 def fosslinux():
+  blog = BlogFeeds()
   link = request.args.get('links')
 
   scrape = WebScrape()
   articles = scrape.fosslinux(link)
 
-  return render_template('article/fosslinux.html', data=articles, title="FossLinux")
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('article/fosslinux.html', data=articles, title="FossLinux",programming=programming_articles, opensource=opensource_articles)
 
 @scraping.get('/linuxhint')
 def linuxhint():
