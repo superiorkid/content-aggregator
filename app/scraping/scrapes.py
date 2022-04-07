@@ -144,6 +144,10 @@ class WebScrape:
       "body": body
     }
 
+    for tag in soup():
+      for attr in ['style', 'name']:
+        del tag[attr]
+
     unwanted = body.find('div', class_="ss-inline-share-wrapper")
     unwanted.replaceWith()
 

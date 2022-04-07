@@ -71,12 +71,17 @@ def linuxhint():
 
 @scraping.get('/itsfoss')
 def itsfoss():
+  blog = BlogFeeds()
   link = request.args.get('links')
 
   scrape = WebScrape()
   articles = scrape.itsfoss(link)
 
-  return render_template('article/itsfoss.html', data=articles, title="It\'s Foss")
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+
+  return render_template('article/itsfoss.html', data=articles, title="It\'s Foss", programming=programming_articles, opensource=opensource_articles)
 
 
 # @scraping.get('/ostechnix')
