@@ -1,14 +1,31 @@
 {% extends "base.html" %}
 
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename="css/articles/codingdojo.css") }}">
+{% endblock %}
+
 {% block content %}
 
-<main class="flex-shrink-0 mt-3">
-  <div class="container">
+<main class="container">
+  <div class="row g-5 mt-1">
+    <div class="col-md-7 col-lg-8">
+
     <h1>{{ data.title }}</h1>
     <p class="mt-2">
       {{ data.body | safe }}
     </p>
-  </div>
+</div>
+
+<div class="col-md-5 col-lg-4 order-md-last">
+<!-- programming list -->
+{% include 'partials/programming_sc.html' %}
+
+
+<!-- Opensource list -->
+{% include 'partials/opensource_sc.html' %}
+</div>
+
+</div>
 </main>
 
 {% endblock %}

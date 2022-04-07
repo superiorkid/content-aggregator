@@ -32,12 +32,16 @@ def github():
 
 @scraping.get('/codingdojo')
 def codingdojo():
+  blog = BlogFeeds()
   link = request.args.get('links')
 
   scrape = WebScrape()
   articles = scrape.codingdojo(link)
 
-  return render_template('article/codingdojo.html', data=articles, title="CodingDojo")
+  programming_articles = blog.programming_section()
+  opensource_articles = blog.opensource_section()
+
+  return render_template('article/codingdojo.html', data=articles, title="CodingDojo", programming=programming_articles, opensource=opensource_articles)
 
 @scraping.get('/fosslinux')
 def fosslinux():
