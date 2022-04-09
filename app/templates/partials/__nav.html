@@ -1,46 +1,34 @@
  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url_for('feed.front_view') }}">FakeGregator</a>
-       <!-- <img src="{{ url_for('static', filename='/img/light-logo.png') }}" alt="..." height="36" class=""> -->
-      <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <div class="container-fluid justify-content-center">
+    <a class="navbar-brand" href="{{ url_for('feed.front_view') }}">
+      <img src="{{ url_for('static', filename='img/Pajarito-Pirate.svg') }}" alt="" width="30" height="24" class="d-inline-block mt-1 align-text-top"> OneSpace P I R A T E
+    </a>
+    <!-- <img src="{{ url_for('static', filename='/img/light-logo.png') }}" alt="..." height="36" class=""> -->
+    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-     <!--  <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+     {# <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('feed.front_view') }}">Home</a>
+            <a class="nav-link" href="#">Saved</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('feed.programming') }}">Programming</a>
+            <a class="nav-link" href="#">User</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('feed.opensource') }}">Open Source</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Switch account</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown01">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div> -->
-    </div>
-  </nav>
+        </div> #}
 
-  <div class="nav-scroller bg-body shadow-sm">
-    <nav class="nav nav-underline" aria-label="Secondary navigation">
-      <a class="nav-link" href="{{ url_for('feed.geek_for_geeks') }}">Geeks for Geeks</a>
-      <a class="nav-link" href="{{ url_for('feed.codingdojo') }}">CodingDojo</a>
-      <a class="nav-link" href="{{ url_for('feed.github') }}">GitHub Blog</a>
-      <a class="nav-link" href="{{ url_for('feed.linuxhint') }}">LinuxHint</a>
-      <a class="nav-link" href="{{ url_for('feed.fosslinux') }}">FOSSlinux</a>
-      <a class="nav-link" href="{{ url_for('feed.itsfoss') }}">I'ts FOSS</a>
+      </div>
     </nav>
-  </div>
+
+    <div class="nav-scroller bg-body shadow-sm">
+      <nav class="nav nav-underline container" aria-label="Secondary navigation">
+        <a class="nav-link" href="{{ url_for('feed.geek_for_geeks') }}">Geeks for Geeks</a>
+        <a class="nav-link" href="{{ url_for('feed.codingdojo') }}">CodingDojo</a>
+        <a class="nav-link" href="{{ url_for('feed.github') }}">GitHub Blog</a>
+        <a class="nav-link" href="{{ url_for('feed.linuxhint') }}">LinuxHint</a>
+        <a class="nav-link" href="{{ url_for('feed.fosslinux') }}">FOSSlinux</a>
+        <a class="nav-link" href="{{ url_for('feed.itsfoss') }}">I'ts FOSS</a>
+      </nav>
+    </div>
 

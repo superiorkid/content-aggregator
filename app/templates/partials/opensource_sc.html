@@ -10,7 +10,7 @@
       <div class="d-flex justify-content-between">
         <strong class="text-gray-dark">{{ item.title }} | <b><i>{{ item.blog_title}}</i></b></strong>
       </div>
-      <p class="mt-2"><strong>Posted:</strong>{{ moment(item.date).fromNow() }}</p>
+      {# <p class="mt-2"><strong>Posted:</strong>{{ moment(item.date).fromNow() }}</p> #}
 
       {% include 'partials/blog_choices.html' %}
     </div>

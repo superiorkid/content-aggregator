@@ -145,7 +145,7 @@ class WebScrape:
     }
 
     for tag in soup():
-      for attr in ['style', 'name']:
+      for attr in ['style', 'name', 'width']:
         del tag[attr]
 
     unwanted = body.find('div', class_="ss-inline-share-wrapper")
@@ -156,6 +156,11 @@ class WebScrape:
 
     for iframe in body.find_all('iframe'):
       iframe['src'] = iframe.get('data-lazy-src')
+
+    for img in body.find_all('img'):
+      img['width'] = '100%'
+      img['height'] = 'auto'
+
 
     return temp
 
