@@ -69,7 +69,7 @@ def codingdojo():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
-  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
+  return render_template('geeksforgeeks.html', title="CodingDojo latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
 @feed.get('/programming/github')
@@ -84,7 +84,7 @@ def github():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
-  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
+  return render_template('geeksforgeeks.html', title="Github Blog latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
 @feed.get('/programming/linuxhint')
@@ -99,7 +99,7 @@ def linuxhint():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
-  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
+  return render_template('geeksforgeeks.html', title="LinuxHint latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
 @feed.get('/programming/fosslinux')
@@ -114,7 +114,7 @@ def fosslinux():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
-  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
+  return render_template('geeksforgeeks.html', title="Fosslinux latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
 
@@ -130,4 +130,4 @@ def itsfoss():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
-  return render_template('geeksforgeeks.html', title="OpenSource", data=articles, programming=programming_articles, opensource=opensource_articles)
+  return render_template('geeksforgeeks.html', title="It`s Foss latest", data=articles, programming=programming_articles, opensource=opensource_articles)

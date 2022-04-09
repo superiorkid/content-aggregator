@@ -15,7 +15,7 @@ def geeksforgeeks():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
-  return render_template('article/geeks.html', data=articles, title="GeeksForGeeks", programming=programming_articles, opensource=opensource_articles)
+  return render_template('article/geeks.html', data=articles, title="Geeksforgeeks", programming=programming_articles, opensource=opensource_articles)
 
 @scraping.get('/github_blog')
 def github():
