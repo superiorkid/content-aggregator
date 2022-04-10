@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager()
 
 # import config
 from config import Config
@@ -9,6 +10,11 @@ from config import Config
 bootstrap = Bootstrap5()
 moment = Moment()
 db = SQLAlchemy()
+
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
+
 
 def page_not_found(e):
   return render_template('error/404.html'), 404
@@ -29,6 +35,7 @@ def create_app():
   bootstrap.init_app(app)
   moment.init_app(app)
   db.init_app(app)
+  login_manager.init_app(app)
 
   # blueprint init
   from .feed import feed as feed_blueprint
