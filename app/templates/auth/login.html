@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="h-100 mb-5">
+    <div class="container h-100">
+      <div class="row justify-content-sm-center h-100">
+        <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+          <div class="text-center my-5">
+            {# <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="100"> #}
+            <img src="{{ url_for('static', filename='img/Pajarito-Pirate.svg') }}" alt="logo" width="100">
+          </div>
+          <div class="card shadow-lg">
+            <div class="card-body p-5">
+              <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+
+              <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                  {{form.email.label(class='mb-2 text-muted')}}
+                  {{form.email(class='form-control')}}
+                  <div class="invalid-feedback">
+                    Email is invalid
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="mb-2 w-100">
+                    {{form.password.label(class='text-muted')}}
+                    <a href="#" class="float-end">
+                      Forgot Password?
+                    </a>
+                  </div>
+                  {{form.password(class='form-control')}}
+                    <div class="invalid-feedback">
+                      Password is required
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                  <div class="form-check">
+                    {{form.remember_me(class='form-check-input')}}
+                    {{form.remember_me.label(class='form-check-label')}}
+                  </div>
+                  <button type="submit" class="btn btn-primary ms-auto">
+                    Login
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer py-3 border-0">
+              <div class="text-center">
+                Don't have an account? <a href="#" class="text-dark">Create One</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+{% endblock content %}
