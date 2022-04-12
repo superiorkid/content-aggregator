@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import Email, DataRequired, Length
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, ValidationError
+from wtforms.validators import Email, DataRequired, Length, Regexp, EqualTo
+from ..models import User
 
 
 class LoginForm(FlaskForm):
@@ -8,3 +9,20 @@ class LoginForm(FlaskForm):
   password = PasswordField('Password', validators=[DataRequired()])
   remember_me = BooleanField('Remember Me')
   submit = SubmitField('Sign In')
+
+
+class RegistrationForm(FlaskForm):
+  email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
+  username = StringField('Username', validators=[DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,'Usernames must have only letters, numbers, dots or underscores')])
+  password = PasswordField('Password', validators=[DataRequired(), EqualTo('confirm_password', 'Password must match.')])
+  confirm_password =PasswordField('Confirm Password', validators=[DataRequired()])
+  submit = SubmitField('Register')
+
+  def validate_email(self, email):
+    if User.query.filter_by(email=email.data).first():
+      raise ValidationError('Email already registered.')
+
+  def validate_username(self, username):
+    if User.query.filter_by(username=username.data).first():
+      raise ValidationError('Username already in use.')
+
