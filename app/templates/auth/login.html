@@ -3,25 +3,28 @@
 {% block content %}
 
 <section class="h-100 mb-5">
-    <div class="container h-100">
-      <div class="row justify-content-sm-center h-100">
-        <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-          <div class="text-center my-5">
-            {# <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="100"> #}
-            <img src="{{ url_for('static', filename='img/Pajarito-Pirate.svg') }}" alt="logo" width="100">
-          </div>
-          <div class="card shadow-lg">
-            <div class="card-body p-5">
-              <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+  <div class="container h-100">
+    <div class="row justify-content-sm-center h-100">
+      <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+        <div class="text-center my-5">
+          <img src="{{ url_for('static', filename='img/Pajarito-Pirate.svg') }}" alt="logo" width="100">
+        </div>
+        <div class="card shadow-lg">
+          <div class="card-body p-5">
+            <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
 
-              <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
-                {{ form.hidden_tag() }}
-                <div class="mb-3">
-                  {{form.email.label(class='mb-2 text-muted')}}
-                  {{form.email(class='form-control')}}
-                  <div class="invalid-feedback">
-                    Email is invalid
-                  </div>
+            {# login form #}
+            <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+              {{ form.hidden_tag() }}
+              <div class="mb-3">
+                {{ form.email.label(class='mb-2 text-muted')}}
+                {{ form.email(class='form-control')}}
+
+                {% for error in form.email.errors %}
+                <div class="invalid-feedback">
+                  {{ error }}
+                </div>
+                {% endfor %}
                 </div>
 
                 <div class="mb-3">
@@ -32,19 +35,21 @@
                     </a>
                   </div>
                   {{form.password(class='form-control')}}
+
+                    {% for error in form.password.errors %}
                     <div class="invalid-feedback">
-                      Password is required
+                      {{ error }}
                     </div>
+                    {% endfor %}
                 </div>
 
                 <div class="d-flex align-items-center">
                   <div class="form-check">
-                    {{form.remember_me(class='form-check-input')}}
+                    {{ form.remember_me(class='form-check-input') }}
                     {{form.remember_me.label(class='form-check-label')}}
                   </div>
-                  <button type="submit" class="btn btn-primary ms-auto">
-                    Login
-                  </button>
+
+                  {{form.submit(class='btn btn-primary ms-auto')}}
                 </div>
               </form>
             </div>
@@ -54,7 +59,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
