@@ -14,56 +14,58 @@
             <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
 
             {# login form #}
-            <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+            <form method="POST" class="needs-validation" autocomplete="off" novalidate>
               {{ form.hidden_tag() }}
               <div class="mb-3">
                 {{ form.email.label(class='mb-2 text-muted')}}
                 {{ form.email(class='form-control')}}
 
                 {% for error in form.email.errors %}
-                <div class="invalid-feedback">
+{#                 <div class="invalid-feedback">
                   {{ error }}
-                </div>
+                </div> #}
+                <span class="invalid-feedback">{{error}}</span>
                 {% endfor %}
+              </div>
+
+              <div class="mb-3">
+                <div class="mb-2 w-100">
+                  {{form.password.label(class='text-muted')}}
+                  <a href="#" class="float-end">
+                    Forgot Password?
+                  </a>
                 </div>
+                {{form.password(class='form-control')}}
 
-                <div class="mb-3">
-                  <div class="mb-2 w-100">
-                    {{form.password.label(class='text-muted')}}
-                    <a href="#" class="float-end">
-                      Forgot Password?
-                    </a>
-                  </div>
-                  {{form.password(class='form-control')}}
-
-                    {% for error in form.password.errors %}
-                    <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                    {# <div class="invalid-feedback">
                       {{ error }}
-                    </div>
+                    </div> #}
+                    <span class="invalid-feedback">{{error}}</span>
                     {% endfor %}
-                </div>
-
-                <div class="d-flex align-items-center">
-                  <div class="form-check">
-                    {{ form.remember_me(class='form-check-input') }}
-                    {{form.remember_me.label(class='form-check-label')}}
                   </div>
 
-                  {{form.submit(class='btn btn-primary ms-auto')}}
+                  <div class="d-flex align-items-center">
+                    <div class="form-check-input">
+                      {{ form.remember_me(class='form-check-input') }}
+                      {{form.remember_me.label(class='form-check-label')}}
+                    </div>
+
+                    {{form.submit(class='btn btn-success ms-auto')}}
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer py-3 border-0">
+                <div class="text-center">
+                  Don't have an account? <a href="{{ url_for('auth.register') }}" class="text-dark">Create One</a>
                 </div>
-              </form>
-            </div>
-            <div class="card-footer py-3 border-0">
-              <div class="text-center">
-                Don't have an account? <a href="{{ url_for('auth.register') }}" class="text-dark">Create One</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 
-{% endblock content %}
+    {% endblock content %}

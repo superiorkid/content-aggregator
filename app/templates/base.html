@@ -1,3 +1,5 @@
+{% from 'bootstrap5/utils.html' import render_messages%}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +9,7 @@
   {% if title %}
   <title>{{ title }} - OneSpacePIRATE</title>
   {% else %}
-  <title>FakeGregator</title>
+  <title>OneSpacePIRATE</title>
   {% endif %}
 
   <title>Document</title>
@@ -18,19 +20,19 @@
   {{ moment.include_moment() }}
 
   <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
     }
+  }
   </style>
 
   {% block head %}
@@ -40,11 +42,27 @@
 <body class="bg-light">
   {% include 'partials/__nav.html' %}
 
+  {# alert #}
+  {% with messages = get_flashed_messages(with_categories=true)  %}
+  {% if messages %}
+
+  {% for category, message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible fade show shadow">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  {% endfor %}
+
+  {% endif %}
+  {% endwith %}
+
   {% block content %}
   {% endblock %}
 
   {% include 'partials/__footer.html' %}
   <script type="text/javascript" src="{{ url_for('static', filename='js/offcanvas.js') }}"></script>
+  {{ bootstrap.load_js() }}
+
 
 </body>
 </html>

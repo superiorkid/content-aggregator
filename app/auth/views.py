@@ -17,7 +17,7 @@ def login():
       login_user(user, form.remember_me.data)
       return redirect(request.args.get('next') or url_for('main.index'))
 
-    flash('Invalid email or password.')
+    flash('Invalid email or password.', 'warning')
 
   return render_template('auth/login.html', form=form, title='Sign In')
 
@@ -31,7 +31,7 @@ def register():
     user = User(email=form.email.data, username=form.username.data, password=form.password.data)
     db.session.add(user)
     db.session.commit()
-    flash('You can now login')
+    flash('You can now login', 'success')
     return redirect(url_for('auth.login'))
 
   return render_template('auth/register.html', form=form)
@@ -41,5 +41,5 @@ def register():
 @login_required
 def logout():
   logout_user()
-  flash('Successfully user logout')
+  flash('Successfully user logout', 'success')
   return redirect(url_for('main.index'))
