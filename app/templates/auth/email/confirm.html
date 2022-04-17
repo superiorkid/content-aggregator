@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Dear {{ user.username }}!</h1>
+
+<h3>Welcome to OneSpacePirate</h3>
+
+<p>To confirm your account please click on the following link:
+<a href="{{ url_for('auth.confirm', token=token, _external=True) }}">{{ url_for('auth.confirm', token=token, _external=True) }}</a></p>
+
+<p>Sincerely,</p><br>
+
+<p>The OneSpacePirate Team</p>
+
+<p>Note: replies to this email address are not monitored.</p>
+
+{% endblock content %}

@@ -1,2 +1,4 @@
 FLASK_APP=wsgi.py
 FLASK_ENV=development
+MAIL_USERNAME=mailtestingforstudy@gmail.com
+MAIL_PASSWORD=22Juni2000
