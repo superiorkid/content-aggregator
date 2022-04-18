@@ -99,8 +99,8 @@ def password_updates():
     user = User.query.filter_by(username=current_user.username).first()
 
     if not user.verify_password(form.old_password.data):
-      flash('rememeber your old password.')
-      return redirect(url_for('auth.password_updates', 'warning'))
+      flash('rememeber your old password.', 'warning')
+      return redirect(url_for('auth.password_updates'))
 
     if user is not None and user.verify_password(form.old_password.data):
       user.password = form.new_password.data
@@ -134,13 +134,14 @@ def reset():
 def reset_token(token):
   form = PasswordForm()
 
+  s = Serializer(current_app.config['SECRET_KEY'])
+  data = s.loads(token)
+
   if form.validate_on_submit():
-    s = Serializer(current_app.config['SECRET_KEY'])
-    data = s.loads(token)
     user = User.query.filter_by(id=data.get('reset')).first()
     user.password = form.password.data
     db.session.commit()
     flash('Password Update successfully', 'success')
     return redirect(url_for('auth.login'))
 
-  return render_template('auth/new_password.html', form=form)
+  return render_template('auth/reset_password.html', form=form)
