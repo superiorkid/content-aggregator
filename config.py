@@ -14,8 +14,8 @@ class Config(object):
   MAIL_PORT = 465
   MAIL_USE_TLS = False
   MAIL_USE_SSL = True
-  MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-  MAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+  MAIL_USERNAME = 'mailtestingforstudy@gmail.com'
+  MAIL_PASSWORD = '22Juni2000'
   MAIL_SUPPRESS_SEND = False
 
   ONESPACEPIRATE_MAIL_SUBJECT_PREFIX = '[OneSpacePirate]'

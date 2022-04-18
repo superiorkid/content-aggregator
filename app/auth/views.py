@@ -1,10 +1,11 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, current_app
 from . import auth
 from ..models import User
-from .forms import LoginForm, RegistrationForm, PasswordUpdates
+from .forms import LoginForm, RegistrationForm, PasswordUpdatesForm, EmailForm, PasswordForm
 from flask_login import login_user, logout_user, login_required, current_user
 from .. import db
 from ..email import send_mail
+from itsdangerous.serializer import Serializer
 
 @auth.get('/login')
 @auth.post('/login')
@@ -75,6 +76,7 @@ def before_request():
 def unconfirmed():
   if current_user.is_anonymous or current_user.confirmed:
     return redirect('main.index')
+
   return render_template('auth/unconfirmed.html')
 
 
@@ -87,11 +89,11 @@ def resend_confirmation():
   return redirect(url_for('main.index'))
 
 
-@auth.get('/new_password')
-@auth.post('/new_password')
+@auth.get('/password_update')
+@auth.post('/password_update')
 @login_required
 def password_updates():
-  form = PasswordUpdates()
+  form = PasswordUpdatesForm()
 
   if form.validate_on_submit(): #post method
     user = User.query.filter_by(username=current_user.username).first()
@@ -108,3 +110,37 @@ def password_updates():
 
   return render_template('auth/new_password.html', form=form, title='New Password')
 
+
+@auth.get('/reset')
+@auth.post('/reset')
+def reset():
+  form = EmailForm()
+
+  if form.validate_on_submit():
+    user = User.query.filter_by(email=form.email.data).first()
+    try:
+      token = user.generate_reset_token()
+      send_mail(user.email, 'Reset Your Password', 'auth/email/reset', user=user.username, token=token)
+      flash('A reset url has been sent to you by email', 'warning')
+      return redirect(url_for('main.index'))
+    except:
+      flash('Your email has not registered', 'warning')
+      return redirect(url_for('auth.reset'))
+
+  return render_template('auth/reset.html', form=form)
+
+@auth.get('/reset/<token>')
+@auth.post('/reset/<token>')
+def reset_token(token):
+  form = PasswordForm()
+
+  if form.validate_on_submit():
+    s = Serializer(current_app.config['SECRET_KEY'])
+    data = s.loads(token)
+    user = User.query.filter_by(id=data.get('reset')).first()
+    user.password = form.password.data
+    db.session.commit()
+    flash('Password Update successfully', 'success')
+    return redirect(url_for('auth.login'))
+
+  return render_template('auth/new_password.html', form=form)

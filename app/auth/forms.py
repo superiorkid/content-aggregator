@@ -26,7 +26,21 @@ class RegistrationForm(FlaskForm):
     if User.query.filter_by(username=username.data).first():
       raise ValidationError('Username already in use.')
 
-class PasswordUpdates(FlaskForm):
+class PasswordUpdatesForm(FlaskForm):
   old_password = PasswordField('Old Password', validators=[DataRequired()])
   new_password = PasswordField('New Password', validators=[DataRequired(), EqualTo('confirm_new_password', 'Password must match.')])
   confirm_new_password = PasswordField('Confirm New Password', validators=[DataRequired()])
+  submit = SubmitField('Update')
+
+
+# form reset password
+class PasswordForm(FlaskForm):
+  password = PasswordField('Password', validators=[DataRequired()])
+  submit = SubmitField('Update')
+
+
+class EmailForm(FlaskForm):
+  email = StringField('Email Address', validators=[DataRequired(), Email()])
+  submit = SubmitField('Send Link')
+
+

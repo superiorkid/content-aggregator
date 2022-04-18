@@ -48,6 +48,24 @@ class User(UserMixin, db.Model):
     db.session.commit()
     return True
 
+  # reset password function
+  #
+  def generate_reset_token(self):
+    s = Serializer(current_app.config['SECRET_KEY'])
+    return s.dumps({'reset': self.id})
+
+  def reset(self, token):
+    s = Serializer(current_app.config['SECRET_KEY'])
+    try:
+      data = s.loads(token)
+    except(BadSignature, SignatureExpired):
+      return False
+
+    if data.get('reset') != self.id:
+      return False
+
+    return True
+
 @login_manager.user_loader
 def load_user(user_id):
   return User.query.get(int(user_id))

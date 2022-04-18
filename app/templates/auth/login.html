@@ -28,7 +28,7 @@
               <div class="mb-3">
                 <div class="mb-2 w-100">
                   {{form.password.label(class='text-muted')}}
-                  <a href="#" class="float-end">
+                  <a href="{{ url_for('auth.reset') }}" class="float-end">
                     Forgot Password?
                   </a>
                 </div>
