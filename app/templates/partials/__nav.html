@@ -1,7 +1,7 @@
  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
   <div class="container-fluid justify-content-center">
     <a class="navbar-brand" href="{{ url_for('feed.front_view') }}">
-      <img src="{{ url_for('static', filename='img/Pajarito-Pirate.svg') }}" alt="" width="30" height="24" class="d-inline-block mt-1 align-text-top"> OneSpace P I R A T E
+      <img src="{{ url_for('static', filename='img/Pajarito-Pirate.svg') }}" alt="" width="30" height="24" class="d-inline-block mt-1 align-text-top"> demogregator
     </a>
     <!-- <img src="{{ url_for('static', filename='/img/light-logo.png') }}" alt="..." height="36" class=""> -->
 
@@ -29,7 +29,7 @@
         <a class="nav-link" href="{{ url_for('auth.password_updates') }}">Change Password</a>
         {% else %}
         <a class="nav-link" href="{{ url_for('auth.login') }}">Sign In</a>
-        <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+ {#        <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a> #}
         {% endif %}
         <a class="nav-link" href="#">&raquo;</a>
 
