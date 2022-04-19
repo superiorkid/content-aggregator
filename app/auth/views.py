@@ -6,6 +6,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from .. import db
 from ..email import send_mail
 from itsdangerous.serializer import Serializer
+from itsdangerous import BadSignature, SignatureExpired
 
 @auth.get('/login')
 @auth.post('/login')
@@ -133,11 +134,15 @@ def reset():
 @auth.post('/reset/<token>')
 def reset_token(token):
   form = PasswordForm()
-
   s = Serializer(current_app.config['SECRET_KEY'])
-  data = s.loads(token)
 
   if form.validate_on_submit():
+    try:
+      data = s.loads(token)
+    except(BadSignature, SignatureExpired) as e:
+      flash('The confirmation link is invalid or has expired', 'danger')
+      return redirect(url_for('auth.reset'))
+
     user = User.query.filter_by(id=data.get('reset')).first()
     user.password = form.password.data
     db.session.commit()
