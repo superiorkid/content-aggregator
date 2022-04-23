@@ -38,7 +38,6 @@ class PasswordForm(FlaskForm):
   password = PasswordField('Password', validators=[DataRequired()])
   submit = SubmitField('Update')
 
-
 class EmailForm(FlaskForm):
   email = StringField('Email Address', validators=[DataRequired(), Email()])
   submit = SubmitField('Send Link')

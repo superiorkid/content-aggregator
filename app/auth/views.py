@@ -139,7 +139,7 @@ def reset_token(token):
   if form.validate_on_submit():
     try:
       data = s.loads(token)
-    except(BadSignature, SignatureExpired) as e:
+    except(BadSignature, SignatureExpired):
       flash('The confirmation link is invalid or has expired', 'danger')
       return redirect(url_for('auth.reset'))
 
@@ -150,3 +150,61 @@ def reset_token(token):
     return redirect(url_for('auth.login'))
 
   return render_template('auth/reset_password.html', form=form)
+
+
+@auth.get('/confirm_password')
+@auth.post('/confirm_password')
+@login_required
+def password_cofirm_email_changes():
+  form = PasswordForm()
+
+  if form.validate_on_submit():
+    user = User.query.filter_by(id=current_user.id).first()
+
+    if user.verify_password(form.password.data):
+      return redirect(url_for('auth.email_change'))
+
+    flash('Your password wrong, try again', 'danger')
+
+  return render_template('auth/reset_password.html', form=form)
+
+
+@auth.get('/change_email')
+@auth.post('/change_email')
+@login_required
+def email_change():
+  form = EmailForm()
+
+  if form.validate_on_submit():
+
+    # email exist?
+    if User.query.filter_by(email=form.email.data).first():
+      flash('Email already  registered, try another email', 'warning')
+      return redirect(request.url)
+
+    user = User.query.filter_by(id=current_user.id).first()
+    token = user.generate_email_changes_token(form.email.data)
+    send_mail(form.email.data, 'Changes Your E-mail', 'auth/email/email_change', user=user, token=token)
+    flash('A new confirmation email has been sent to you by email.', 'warning')
+
+  return render_template('auth/change_email.html', form=form)
+
+@auth.get('change_email/<token>')
+@auth.post('change_email/<token>')
+@login_required
+def confirm_email_change(token):
+  s = Serializer(current_app.config['SECRET_KEY'])
+
+  try:
+    data = s.loads(token)
+  except(BadSignature, SignatureExpired):
+    flash('The confirmation link is invalid or has expired', 'danger')
+    return redirect(url_for('auth.email_change'))
+
+  user = User.query.filter_by(id=current_user.id).first()
+  user.email = data.get('new_email')
+  db.session.add(user)
+  db.session.commit()
+  flash('Your email successfully changes', 'success')
+  return redirect(url_for('main.index'))
+

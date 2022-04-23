@@ -54,6 +54,14 @@ class User(UserMixin, db.Model):
     s = Serializer(current_app.config['SECRET_KEY'])
     return s.dumps({'reset': self.id})
 
+  def generate_email_changes_token(self, new_email):
+    s = Serializer(current_app.config['SECRET_KEY'])
+    return s.dumps({
+        'reset': self.id,
+        'new_email': new_email
+      })
+
+
   # def reset(self, token):
   #   s = Serializer(current_app.config['SECRET_KEY'])
   #   try:
@@ -65,6 +73,7 @@ class User(UserMixin, db.Model):
   #     return False
 
   #   return True
+
 
 @login_manager.user_loader
 def load_user(user_id):
