@@ -1,6 +1,6 @@
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from . import login_manager
 from flask import current_app
 from itsdangerous.serializer import Serializer
@@ -13,6 +13,16 @@ class User(UserMixin, db.Model):
   email = db.Column(db.String(80), index=True, nullable=False)
   password_hash = db.Column(db.String(128))
   confirmed = db.Column(db.Boolean, default=False)
+  role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
+
+  def __init__(self, **kwargs):
+    super(User, self).__init__(**kwargs)
+
+    if self.role is None:
+      if self.email == current_app.config['IS_ADMIN']:
+        self.role = Role.query.filter_by(permissions=0xff).first()
+      if self.role is None:
+        self.role = Role.query.filter_by(default=True).first()
 
   def __repr__(self):
     return '<User {}>'.format(self.username)
@@ -61,18 +71,52 @@ class User(UserMixin, db.Model):
         'new_email': new_email
       })
 
+  def can(self, permissions):
+    return self.role is not None  and (self.role.permissions & permissions) == permissions
 
-  # def reset(self, token):
-  #   s = Serializer(current_app.config['SECRET_KEY'])
-  #   try:
-  #     data = s.loads(token)
-  #   except(BadSignature, SignatureExpired):
-  #     return False
+  def is_administrator(self):
+    return self.can(Permission.ADMINISTER)
 
-  #   if data.get('reset') != self.id:
-  #     return False
 
-  #   return True
+class AnonymousUser(AnonymousUserMixin):
+  def can(self, permissions):
+    return False
+
+  def is_administrator(self):
+    return False
+
+login_manager.anonymous_user = AnonymousUser
+
+class Permission:
+  BOOKMARK = 0x01
+  ADMINISTER = 0x02
+
+class Role(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String(64), unique=True)
+  default = db.Column(db.Boolean, default=False, index=True)
+  permissions = db.Column(db.Integer)
+  users = db.relationship('User', backref='role', lazy='dynamic')
+
+  def __repr__(self):
+    return f'<Role {self.name}>'
+
+  @staticmethod
+  def insert_roles():
+    roles = {
+      'User': (Permission.BOOKMARK, True),
+      'Administrator': (0xff, False)
+    }
+
+    for r in roles:
+      role = Role.query.filter_by(name=r).first()
+      if role is None:
+        role = Role(name=r)
+
+      role.permissions = roles[r][0]
+      role.default = roles[r][1]
+      db.session.add(role)
+    db.session.commit()
 
 
 @login_manager.user_loader

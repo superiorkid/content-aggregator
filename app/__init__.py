@@ -24,9 +24,11 @@ login_manager.login_message_category = 'warning'
 def page_not_found(e):
   return render_template('error/404.html'), 404
 
-
 def internal_server_error(e):
   return render_template('error/500.html'), 500
+
+def forbidden(e):
+  return render_template('error/403.html'), 403
 
 
 def create_app():
@@ -58,5 +60,6 @@ def create_app():
   # error handling
   app.register_error_handler(404, page_not_found)
   app.register_error_handler(500, internal_server_error)
+  app.register_error_handler(403, forbidden)
 
   return app
