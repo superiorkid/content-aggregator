@@ -119,14 +119,13 @@ def reset():
 
   if form.validate_on_submit():
     user = User.query.filter_by(email=form.email.data).first()
-    try:
+    if user:
       token = user.generate_reset_token()
       send_mail(user.email, 'Reset Your Password', 'auth/email/reset', user=user.username, token=token)
       flash('A reset url has been sent to you by email', 'warning')
       return redirect(url_for('main.index'))
-    except:
-      flash('Your email has not registered', 'warning')
-      return redirect(url_for('auth.reset'))
+
+    flash('Your email has not registered', 'warning')
 
   return render_template('auth/reset.html', form=form)
 
