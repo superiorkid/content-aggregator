@@ -1,13 +1,13 @@
  {% if 'geeksforgeeks' in item.link %}
- <a href="{{ url_for('scraping.geeksforgeeks') }}?links={{ item.link }}">Read &raquo;</a>
+ <a class="link-primary" href="{{ url_for('scraping.geeksforgeeks') }}?links={{ item.link }}">Read &raquo;</a>
  {% elif 'codingdojo' in item.link %}
- <a href="{{ url_for('scraping.codingdojo') }}?links={{ item.link }}">Read &raquo;</a>
+ <a class="link-primary" href="{{ url_for('scraping.codingdojo') }}?links={{ item.link }}">Read &raquo;</a>
  {% elif 'github' in item.link %}
- <a href="{{ url_for('scraping.github') }}?links={{ item.link }}">Read &raquo;</a>
+ <a class="link-primary" href="{{ url_for('scraping.github') }}?links={{ item.link }}">Read &raquo;</a>
  {% elif 'itsfoss' in item.link %}
- <a href="{{ url_for('scraping.itsfoss') }}?links={{ item.link }}">Read &raquo;</a>
+ <a class="link-primary" href="{{ url_for('scraping.itsfoss') }}?links={{ item.link }}">Read &raquo;</a>
  {% elif 'fosslinux' in item.link %}
- <a href="{{ url_for('scraping.fosslinux') }}?links={{ item.link }}">Read &raquo;</a>
+ <a class="link-primary" href="{{ url_for('scraping.fosslinux') }}?links={{ item.link }}">Read &raquo;</a>
  {% else %}
- <a href="{{ url_for('scraping.linuxhint') }}?links={{ item.link }}">Read &raquo;</a>
+ <a class="link-primary" href="{{ url_for('scraping.linuxhint') }}?links={{ item.link }}">Read &raquo;</a>
  {% endif %}

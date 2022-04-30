@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
+{% block head %}
+  <style type="text/css">
+    a.disabled {
+      /* make the disabledlinks graylish */
+      color: gray;
+      /* and disable the pointer events */
+      pointer-events: none;
+    }
+  </style>
+{% endblock head %}
+
 {% block content %}
 
 <main class="container">
@@ -20,6 +31,16 @@
             </div>
             <span class="d-block">{{ item.summary[:150] }} ...</span>
 
+            {# <a href="{{ url_for('bookmark.add') }}?name={{ item.blog_title }}&img={{ item.blog_img }}&title={{item.title}}&link={{ item.link }}&posted={{ item.date }}" class="link-primary">Save</a> #}
+
+            {% if current_user.is_authenticated %}
+            {% if item.link in bookmarks|map(attribute="link") %}
+            <a href="#" class="disabled link-primary">Saved</a>
+            {% else %}
+            <a href="{{ url_for('bookmark.add') }}?name={{ item.blog_title }}&img={{ item.blog_img }}&title={{item.title}}&link={{ item.link }}&posted={{ item.date }}" class="link-primary">Save</a>
+            {% endif %}
+            {% endif %}
+
             {% include 'partials/blog_choices.html' %}
           </div>
         </div>
@@ -32,12 +53,12 @@
 </div>
 
 <div class="col-md-5 col-lg-4 order-md-last">
-<!-- programming list -->
-{% include 'partials/programming_sc.html' %}
+  <!-- programming list -->
+  {% include 'partials/programming_sc.html' %}
 
 
-<!-- Opensource list -->
-{% include 'partials/opensource_sc.html' %}
+  <!-- Opensource list -->
+  {% include 'partials/opensource_sc.html' %}
 </div>
 
 </div>

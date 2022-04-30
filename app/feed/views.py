@@ -2,7 +2,8 @@ from . import feed
 
 from flask import render_template
 from app.feeds import BlogFeeds
-
+from ..models import User
+from flask_login import current_user
 
 @feed.get('/explore')
 def front_view():
@@ -16,8 +17,11 @@ def front_view():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
-  return render_template('index.html',data = data, programming=programming_articles, opensource=opensource_articles, title = 'Explore')
+  if current_user.is_authenticated:
+    bookmarks = current_user.bookmarks.all()
+    return render_template('index.html', data = data, programming=programming_articles, opensource=opensource_articles, title = 'Explore', bookmarks=bookmarks)
 
+  return render_template('index.html', data = data, programming=programming_articles, opensource=opensource_articles, title = 'Explore')
 
 
 @feed.get('/programming')
@@ -131,3 +135,4 @@ def itsfoss():
   opensource_articles = blog.opensource_section()
 
   return render_template('per_sites.html', title="It`s Foss latest", data=articles, programming=programming_articles, opensource=opensource_articles)
+

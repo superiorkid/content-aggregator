@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Bookmark</h6>
+
+    <!-- content -->
+    {% if not bookmark|length %}
+    <p>Item is Empty</p>
+    {% else %}
+    {% for item in bookmark %}
+    <div class="d-flex text-muted pt-3">
+      <img src="{{ item.blog_img_url }}" alt="Bootstrap" width="42" height="42" class="rounded-circle border border-white bd-placeholder-img flex-shrink-0 me-2">
+
+      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+        <div class="d-flex justify-content-between">
+          <strong class="text-gray-dark">{{ item.title }} | <b><i>{{ item.blog_name}}</i></b></strong>
+          <span><strong>Posted:</strong>{{ moment(item.posted).fromNow() }}</span>
+        </div>
+        <a class="link-primary" href="{{ url_for('bookmark.delete', id=item.id) }}">Delete</a>
+        {% include 'partials/blog_choices.html' %}
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+  </div>
+</main>
+
+
+{% endblock content %}

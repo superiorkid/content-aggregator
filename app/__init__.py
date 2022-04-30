@@ -51,11 +51,13 @@ def create_app():
   from .main import main as main_blueprint
   from .scraping import scraping as scrape_blueprint
   from .auth import auth as auth_blueprint
+  from .bookmark import bookmark as bookmark_blueprint
 
   app.register_blueprint(feed_blueprint, url_prefix='/feed')
   app.register_blueprint(main_blueprint)
   app.register_blueprint(scrape_blueprint, url_prefix='/feed/article')
   app.register_blueprint(auth_blueprint, url_prefix='/auth')
+  app.register_blueprint(bookmark_blueprint, url_prefix='/bookmark')
 
   # error handling
   app.register_error_handler(404, page_not_found)

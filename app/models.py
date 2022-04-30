@@ -5,6 +5,7 @@ from . import login_manager
 from flask import current_app
 from itsdangerous.serializer import Serializer
 from itsdangerous import BadSignature, SignatureExpired
+from datetime import datetime
 
 
 class User(UserMixin, db.Model):
@@ -14,6 +15,7 @@ class User(UserMixin, db.Model):
   password_hash = db.Column(db.String(128))
   confirmed = db.Column(db.Boolean, default=False)
   role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
+  bookmarks = db.relationship('Bookmark', backref='user', lazy='dynamic')
 
   def __init__(self, **kwargs):
     super(User, self).__init__(**kwargs)
@@ -122,3 +124,18 @@ class Role(db.Model):
 @login_manager.user_loader
 def load_user(user_id):
   return User.query.get(int(user_id))
+
+
+class Bookmark(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  blog_name = db.Column(db.String)
+  blog_img_url = db.Column(db.String)
+  title =  db.Column(db.String(255), index=True)
+  link = db.Column(db.String(255))
+  posted = db.Column(db.DateTime)
+  timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+  def __repr__(self):
+    return f'<Title {self.title}>'
+
