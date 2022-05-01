@@ -15,6 +15,8 @@ class User(UserMixin, db.Model):
   email = db.Column(db.String(80), index=True, nullable=False)
   password_hash = db.Column(db.String(128))
   confirmed = db.Column(db.Boolean, default=False)
+  last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+  join_date = db.Column(db.DateTime, default=datetime.utcnow)
   role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
   bookmarks = db.relationship('Bookmark', backref='user', lazy='dynamic')
 

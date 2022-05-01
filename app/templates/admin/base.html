@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Demogregator</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin/css/index.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/Pajarito-Pirate.svg') }}">
+
+    {{ moment.include_moment() }}
+
+
+</head>
+<body>
+
+    {% block content %}{% endblock content %}
+
+</body>
+</html>

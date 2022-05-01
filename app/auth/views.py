@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash, current_app
+from flask import render_template, redirect, request, url_for, flash, current_app, abort
 from . import auth
 from ..models import User
 from .forms import LoginForm, RegistrationForm, PasswordUpdatesForm, EmailForm, PasswordForm
@@ -7,6 +7,15 @@ from .. import db
 from ..email import send_mail
 from itsdangerous.serializer import Serializer
 from itsdangerous import BadSignature, SignatureExpired
+from datetime import datetime
+
+
+@auth.before_request
+def before_request():
+  if current_user.is_authenticated:
+    current_user.last_seen = datetime.utcnow()
+    db.session.commit()
+
 
 @auth.get('/login')
 @auth.post('/login')
@@ -206,4 +215,18 @@ def confirm_email_change(token):
   db.session.commit()
   flash('Your email successfully changes', 'success')
   return redirect(url_for('main.index'))
+
+
+@auth.route('<id>/delete')
+def delete(id):
+  user = User.query.filter_by(id=id).first()
+
+  if not user:
+    abort(404)
+
+  db.session.delete(user)
+  db.session.commit()
+  flash('User Deleted Successfully', 'success')
+  return redirect(url_for('admin.dashboard'))
+
 
