@@ -6,6 +6,7 @@ from flask import current_app
 from itsdangerous.serializer import Serializer
 from itsdangerous import BadSignature, SignatureExpired
 from datetime import datetime
+from hashlib import md5
 
 
 class User(UserMixin, db.Model):
@@ -78,6 +79,10 @@ class User(UserMixin, db.Model):
 
   def is_administrator(self):
     return self.can(Permission.ADMINISTER)
+
+  def avatar(self, size):
+    digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+    return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
 
 
 class AnonymousUser(AnonymousUserMixin):
