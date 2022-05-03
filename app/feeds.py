@@ -13,7 +13,7 @@ class BlogFeeds(object):
       "github": "https://github.blog/feed/"
     }
     self.__opensource = {
-      "linuxhint": "https://linuxhint.com/feed/",
+      # "linuxhint": "https://linuxhint.com/feed/",
       "fosslinux": "https://www.fosslinux.com/feed",
       "itsfoss": "https://itsfoss.com/feed/"
     }

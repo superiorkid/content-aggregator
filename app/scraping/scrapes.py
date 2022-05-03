@@ -46,7 +46,7 @@ class WebScrape:
     body = soup.find(class_="post__content")
 
     temp = {
-      "title": soup.find(class_='post-hero').find('h1').get_text(),
+      "title": soup.find('h1').get_text(),
       "body": body
     }
 
@@ -58,8 +58,8 @@ class WebScrape:
       for attr in ['style', 'name']:
         del tag[attr]
 
-    unwanted = body.find('div', class_="f5-mktg")
-    unwanted.replaceWith('')
+    unwanted = body.find('div', class_="post-tags")
+    unwanted.replaceWith()
 
     for i in body.find_all('img'):
       del i["srcset"]
