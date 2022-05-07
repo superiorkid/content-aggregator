@@ -8,12 +8,10 @@ class BlogFeeds(object):
 
   def __init__(self):
     self.__programming = {
-      "geeksforgeeks": "https://www.geeksforgeeks.org/feed/",
       "codingdojo": "https://www.codingdojo.com/blog/feed",
       "github": "https://github.blog/feed/"
     }
     self.__opensource = {
-      # "linuxhint": "https://linuxhint.com/feed/",
       "fosslinux": "https://www.fosslinux.com/feed",
       "itsfoss": "https://itsfoss.com/feed/"
     }

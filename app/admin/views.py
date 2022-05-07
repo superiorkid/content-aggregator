@@ -2,7 +2,7 @@ from . import admin
 from ..decorators import admin_required
 from flask_login import login_required
 from flask import render_template
-from ..models import User
+from ..models import User, newest
 
 @admin.route('/')
 @admin_required
@@ -14,4 +14,4 @@ def dashboard():
   for user in users:
     articles_total += len(user.bookmarks.all())
 
-  return render_template('admin/index.html', users=users, articles_total=articles_total)
+  return render_template('admin/index.html', users=users, articles_total=articles_total, newest=newest())

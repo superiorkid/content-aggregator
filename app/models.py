@@ -5,8 +5,11 @@ from . import login_manager
 from flask import current_app
 from itsdangerous.serializer import Serializer
 from itsdangerous import BadSignature, SignatureExpired
-from datetime import datetime
+from datetime import datetime, timedelta
+from dateutil import tz
 from hashlib import md5
+
+
 
 
 class User(UserMixin, db.Model):
@@ -86,6 +89,10 @@ class User(UserMixin, db.Model):
     digest = md5(self.email.lower().encode('utf-8')).hexdigest()
     return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
 
+@staticmethod
+def newest():
+  recent = datetime.now(tz=tz.tzlocal()) - timedelta(hours=720) # 720 = 1 month
+  return User.query.filter(User.join_date >= recent).order_by(User.join_date.desc()).all()
 
 class AnonymousUser(AnonymousUserMixin):
   def can(self, permissions):
