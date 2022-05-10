@@ -2,7 +2,7 @@ from app import create_app, db
 from app.models import User, Role, Bookmark
 from dotenv import load_dotenv
 
-load_dotenv('.flaskenv')
+load_dotenv('.env')
 
 app = create_app()
 

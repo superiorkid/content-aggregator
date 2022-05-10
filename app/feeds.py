@@ -99,7 +99,7 @@ class BlogFeeds(object):
         # if any post doesn't have information then throw error.
         try:
             temp["title"] = post.title
-            temp["summary"] = self.cleanhtml(post.summary)
+            temp["summary"] = self.cleanhtml(post.summary).encode('utf-8')
             temp['date'] = self.parse_datetime(post.published)
             temp['link'] = post.link
         except:

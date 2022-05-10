@@ -9,9 +9,6 @@ from datetime import datetime, timedelta
 from dateutil import tz
 from hashlib import md5
 
-
-
-
 class User(UserMixin, db.Model):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(64), index=True, nullable=False)
@@ -142,8 +139,8 @@ def load_user(user_id):
 
 class Bookmark(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  blog_name = db.Column(db.String)
-  blog_img_url = db.Column(db.String)
+  blog_name = db.Column(db.String(255))
+  blog_img_url = db.Column(db.String(255))
   title =  db.Column(db.String(255), index=True)
   link = db.Column(db.String(255))
   posted = db.Column(db.DateTime)
