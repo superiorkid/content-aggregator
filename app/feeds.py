@@ -16,7 +16,7 @@ class BlogFeeds(object):
       "itsfoss": "https://itsfoss.com/feed/"
     }
 
-    self.pattern = re.compile('<.*?>')
+    # self.pattern = re.compile('<.*?>')
 
   @property
   def programming(self):
@@ -34,7 +34,7 @@ class BlogFeeds(object):
     :type raw_html: str
     :return: The cleaned text.
     """
-    cleantext = re.sub(self.pattern, '', raw_html)
+    cleantext = re.sub("[^-9A-Za-z ]", '', raw_html)
     return cleantext
 
   def parse_datetime(self, str_date: str):
@@ -53,7 +53,7 @@ class BlogFeeds(object):
 
     blog = [feedparser.parse(url) for site, url in blog_url.items()]
 
-    articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
+    articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': self.cleanhtml(i.title), 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
     articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
 
     return articles_sorted[:10]
@@ -99,7 +99,7 @@ class BlogFeeds(object):
         # if any post doesn't have information then throw error.
         try:
             temp["title"] = post.title
-            temp["summary"] = self.cleanhtml(post.summary).encode('utf-8')
+            temp["summary"] = self.cleanhtml(post.summary)
             temp['date'] = self.parse_datetime(post.published)
             temp['link'] = post.link
         except:
