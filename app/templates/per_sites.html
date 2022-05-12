@@ -21,6 +21,14 @@
             </div>
             <span class="d-block">{{ item.summary[:150] }} ...</span>
 
+            {% if current_user.is_authenticated %}
+            {% if item.link in bookmarks|map(attribute="link") %}
+              <a href="#" class="disabled link-primary">Saved</a>
+            {% else %}
+              <a href="{{ url_for('bookmark.add') }}?name={{ data.blog_title }}&img={{ data.blog_img }}&title={{item.title}}&link={{ item.link }}&posted={{ item.date }}" class="link-primary">Save</a>
+            {% endif %}
+            {% endif %}
+
             {% include 'partials/blog_choices.html' %}
           </div>
         </div>

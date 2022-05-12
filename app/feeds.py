@@ -64,7 +64,7 @@ class BlogFeeds(object):
 
     blog = [feedparser.parse(url) for site, url in blog_url.items()]
 
-    articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
+    articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': self.cleanhtml(i.title), 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
     articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
 
     return articles_sorted
@@ -75,7 +75,7 @@ class BlogFeeds(object):
 
     blog = [feedparser.parse(url) for site, url in blog_url.items()]
 
-    articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': i.title, 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
+    articles = [{'blog_title': feeds.feed.title, 'blog_img': feeds.feed.image.href, 'title': self.cleanhtml(i.title), 'summary': self.cleanhtml(i.summary),'date': self.parse_datetime(i.published), 'link': i.link} for feeds in blog for i in feeds.entries]
     articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
 
     return articles_sorted
@@ -98,7 +98,7 @@ class BlogFeeds(object):
 
         # if any post doesn't have information then throw error.
         try:
-            temp["title"] = post.title
+            temp["title"] = self.cleanhtml(post.title)
             temp["summary"] = self.cleanhtml(post.summary)
             temp['date'] = self.parse_datetime(post.published)
             temp['link'] = post.link

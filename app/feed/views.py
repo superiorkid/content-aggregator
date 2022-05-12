@@ -73,6 +73,10 @@ def codingdojo():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
+  if current_user.is_authenticated:
+    bookmarks = current_user.bookmarks.all()
+    return render_template('per_sites.html', title="CodingDojo latest", data=articles, programming=programming_articles, opensource=opensource_articles, bookmarks=bookmarks)
+
   return render_template('per_sites.html', title="CodingDojo latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
@@ -88,6 +92,10 @@ def github():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
+  if current_user.is_authenticated:
+    bookmarks = current_user.bookmarks.all()
+    return render_template('per_sites.html', title="Github Blog latest", data=articles, programming=programming_articles, opensource=opensource_articles, bookmarks=bookmarks)
+
   return render_template('per_sites.html', title="Github Blog latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
@@ -101,7 +109,7 @@ def linuxhint():
 
   articles = blog.individual_blog(url)
   programming_articles = blog.programming_section()
-  opensource_articles = blog.opensource_section()
+  opensource_articles = blog.opensource_section()  
 
   return render_template('per_sites.html', title="LinuxHint latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
@@ -118,6 +126,10 @@ def fosslinux():
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
 
+  if current_user.is_authenticated:
+    bookmarks = current_user.bookmarks.all()
+    return render_template('per_sites.html', title="Fosslinux latest", data=articles, programming=programming_articles, opensource=opensource_articles, bookmarks=bookmarks)
+
   return render_template('per_sites.html', title="Fosslinux latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
@@ -133,6 +145,10 @@ def itsfoss():
   articles = blog.individual_blog(url)
   programming_articles = blog.programming_section()
   opensource_articles = blog.opensource_section()
+
+  if current_user.is_authenticated:
+    bookmarks = current_user.bookmarks.all()
+    return render_template('per_sites.html', title="It`s Foss latest", data=articles, programming=programming_articles, opensource=opensource_articles, bookmarks=bookmarks)
 
   return render_template('per_sites.html', title="It`s Foss latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
