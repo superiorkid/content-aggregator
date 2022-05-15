@@ -22,3 +22,8 @@ class Config(object):
   ONESPACEPIRATE_MAIL_SUBJECT_PREFIX = '[OneSpacePirate]'
   ONESPACEPIRATE_MAIL_SENDER = 'OneSpacePirate Admin <noreply@onespacepirate.com>'
 
+  GITHUB_OAUTH_CLIENT_ID = os.environ.get("GITHUB_OAUTH_CLIENT_ID")
+  GITHUB_OAUTH_CLIENT_SECRET = os.environ.get("GITHUB_OAUTH_CLIENT_SECRET")
+  GOOGLE_OAUTH_CLIENT_ID = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
+  GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
+

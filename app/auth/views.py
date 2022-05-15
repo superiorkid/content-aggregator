@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, url_for, flash, current_app, abort
 from . import auth
-from ..models import User
+from ..models import User, OAuth
 from .forms import LoginForm, RegistrationForm, PasswordUpdatesForm, EmailForm, PasswordForm
 from flask_login import login_user, logout_user, login_required, current_user
 from .. import db
@@ -20,6 +20,9 @@ def before_request():
 @auth.get('/login')
 @auth.post('/login')
 def login():
+  if current_user.is_authenticated:
+    return redirect(url_for('main.index'))  
+
   form = LoginForm()
 
   if form.validate_on_submit():
@@ -37,6 +40,9 @@ def login():
 @auth.get('/register')
 @auth.post('/register')
 def register():
+  if current_user.is_authenticated:
+    return redirect(url_for('main.index'))
+
   form = RegistrationForm()
 
   if form.validate_on_submit():
@@ -229,4 +235,27 @@ def delete(id):
   flash('User Deleted Successfully', 'success')
   return redirect(url_for('admin.dashboard'))
 
+@auth.get('/merge')
+@auth.post('/merge')
+@login_required
+def merge():
+  form = LoginForm(data={'username': request.args.get('username')})
+  if form.validate_on_submit():
+    user = form.get_user()
+    if user:
+      if user != current_user:
+        merge_users(current_user, user)
+        flash("User {username} has been merged into your account".format(username=user.username))
+        return redirect(url_for('main.index'))
+      else:
+        form.username.errors.append('Cannot merge with yourself')
 
+  return render_template('auth/merge.html', form=form)
+
+
+def merge_users(merge_into, merge_from):
+  assert merge_into != merge_from
+  OAuth.query.filter_by(user=merge_from).update({'user_id': merge_into.id})
+  db.session.delete(merge_from)
+  db.session.commit()
+  return merge_into

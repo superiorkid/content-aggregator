@@ -53,6 +53,7 @@ def create_app():
   from .auth import auth as auth_blueprint
   from .bookmark import bookmark as bookmark_blueprint
   from .admin import admin as admin_blueprint
+  from .oauth import github_blueprint, google_blueprint
 
   app.register_blueprint(feed_blueprint, url_prefix='/feed')
   app.register_blueprint(main_blueprint)
@@ -60,6 +61,8 @@ def create_app():
   app.register_blueprint(auth_blueprint, url_prefix='/auth')
   app.register_blueprint(bookmark_blueprint, url_prefix='/bookmark')
   app.register_blueprint(admin_blueprint, url_prefix='/admin')
+  app.register_blueprint(github_blueprint, url_prefix='/login')
+  app.register_blueprint(google_blueprint, url_prefix='/login')
 
   # error handling
   app.register_error_handler(404, page_not_found)
