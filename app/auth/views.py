@@ -239,13 +239,13 @@ def delete(id):
 @auth.post('/merge')
 @login_required
 def merge():
-  form = LoginForm(data={'username': request.args.get('username')})
+  form = LoginForm(data={'email': request.args.get('email')})
   if form.validate_on_submit():
     user = form.get_user()
     if user:
       if user != current_user:
         merge_users(current_user, user)
-        flash("User {username} has been merged into your account".format(username=user.username))
+        flash(f"User {user.email} has been merged into your account")
         return redirect(url_for('main.index'))
       else:
         form.username.errors.append('Cannot merge with yourself')

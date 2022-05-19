@@ -12,7 +12,7 @@
           <a class="nav-link" href="{{ url_for('bookmark.bookmark_item') }}">Bookmark
           </a>
         </li>
-        {% if current_user.is_administrator() %}
+        {% if current_user.is_administrator() and current_user.confirmed %}
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{{ url_for('admin.dashboard') }}">Admin</a>
         </li>
@@ -27,6 +27,7 @@
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="{{ url_for('auth.password_cofirm_email_changes') }}">Change Email</a></li>
             <li><a class="dropdown-item" href="{{ url_for('auth.password_updates') }}">Change Password</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('auth.merge') }}">Merge Account</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>

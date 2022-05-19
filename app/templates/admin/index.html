@@ -159,12 +159,13 @@
                                     </td>
                                     <td>
                                         <span class="badge badge-lg badge-dot">
-                                            {% if current_user.is_active %}
+                                            
+                                            {% if user == current_user %}
                                             <i class="bg-success"></i>Online
+
                                             {% else %}
                                             <i class="bg-danger"></i>{{ moment(user.last_seen).fromNow() }}
                                             {% endif %}
-                                            {# <i class="bg-success"></i>{{ user.last_seen }} #}
                                         </span>
                                     </td>
                                     <td class="text-end">

@@ -9,6 +9,18 @@ class LoginForm(FlaskForm):
   password = PasswordField('Password', validators=[DataRequired()])
   remember_me = BooleanField('Remember Me')
   submit = SubmitField('Sign In')
+  
+  def get_user(self):
+    user = User.query.filter_by(email=self.email.data).first()
+    if not user:
+      self.email.errors.append('Email not Found')
+      return None
+    
+    if not user.verify_password(self.password.data):
+      self.password.errors.append('Invalid password')
+      return None
+    
+    return user
 
 
 class RegistrationForm(FlaskForm):
@@ -43,5 +55,10 @@ class PasswordForm(FlaskForm):
 class EmailForm(FlaskForm):
   email = StringField('Email Address', validators=[DataRequired(), Email()])
   submit = SubmitField('Send Link')
+
+
+# class MergeAccount(FlaskForm):
+#   username = StringField('Username', validators=[DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,'Usernames must have only letters, numbers, dots or underscores')])
+#   password = 
 
 
