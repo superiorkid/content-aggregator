@@ -3,12 +3,12 @@ from . import auth
 from ..models import User, OAuth
 from .forms import LoginForm, RegistrationForm, PasswordUpdatesForm, EmailForm, PasswordForm
 from flask_login import login_user, logout_user, login_required, current_user
-from .. import db
+from .. import db, socketio
 from ..email import send_mail
 from itsdangerous.serializer import Serializer
 from itsdangerous import BadSignature, SignatureExpired
 from datetime import datetime
-
+from ..utils.utility import merge_users
 
 @auth.before_request
 def before_request():
@@ -251,11 +251,3 @@ def merge():
         form.username.errors.append('Cannot merge with yourself')
 
   return render_template('auth/merge.html', form=form)
-
-
-def merge_users(merge_into, merge_from):
-  assert merge_into != merge_from
-  OAuth.query.filter_by(user=merge_from).update({'user_id': merge_into.id})
-  db.session.delete(merge_from)
-  db.session.commit()
-  return merge_into
