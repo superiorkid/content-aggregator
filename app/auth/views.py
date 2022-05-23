@@ -32,7 +32,7 @@ def login():
       login_user(user, remember=form.remember_me.data)
       return redirect(request.args.get('next') or url_for('main.index'))
 
-    flash('Invalid email or password.', 'warning')
+    flash('The e-mail address and/or password you specified are not correct.', 'danger')
 
   return render_template('auth/login.html', form=form, title='Sign In')
 
@@ -140,7 +140,7 @@ def reset():
       flash('A reset url has been sent to you by email', 'warning')
       return redirect(url_for('main.index'))
 
-    flash('Your email has not registered', 'warning')
+    flash('The e-mail address is not assigned to any user account', 'danger')
 
   return render_template('auth/reset.html', form=form)
 

@@ -44,7 +44,10 @@ class User(UserMixin, db.Model):
     self.password_hash = generate_password_hash(passwords)
 
   def verify_password(self, passwords):
-    return check_password_hash(self.password_hash, passwords)
+    if self.password_hash:
+      return check_password_hash(self.password_hash, passwords)
+    
+    return False
 
   # account confirmation
   def generate_confirmation_token(self):

@@ -1,8 +1,5 @@
 from app import create_app, db
 from app.models import User, Role, Bookmark, OAuth
-from dotenv import load_dotenv
-
-load_dotenv('.env')
 
 app = create_app()
 
