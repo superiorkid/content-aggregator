@@ -3,7 +3,7 @@ from . import auth
 from ..models import User, OAuth
 from .forms import LoginForm, RegistrationForm, PasswordUpdatesForm, EmailForm, PasswordForm
 from flask_login import login_user, logout_user, login_required, current_user
-from .. import db, socketio
+from .. import db
 from ..email import send_mail
 from itsdangerous.serializer import Serializer
 from itsdangerous import BadSignature, SignatureExpired
