@@ -8,7 +8,8 @@ class Config(object):
   SECRET_KEY = os.getenv('SECRET_KEY') or os.urandom(12)
 
   # database
-  SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI') or "postgresql://superiorkid:root@localhost/aggregator"
+  # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI') or "postgresql://superiorkid:root@localhost/aggregator"
+  SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', '').replace('postgres://', 'postgresql://') or "postgresql://superiorkid:root@localhost/aggregator"
   SQLALCHEMY_TRACK_MODIFICATIONS = False
 
   # email
