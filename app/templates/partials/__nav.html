@@ -37,7 +37,12 @@
         </li>
         {% else %}
         <li class="nav-item">
-          <a href="{{ url_for('auth.login') }}" class="nav-link">Sign In</a>
+          
+          {% if request.url_rule.endpoint == 'auth.login' %}
+            <a href="#login" class="nav-link disabled">.</a>
+          {% else %}  
+            <a href="{{ url_for('auth.login') }}" class="nav-link">Sign In</a>  
+          {% endif %}            
         </li>
         {% endif %}
       </ul>
