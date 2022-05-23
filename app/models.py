@@ -97,10 +97,18 @@ class OAuth(OAuthConsumerMixin, db.Model):
   user = db.relationship(User, backref=db.backref('oauth', collection_class=attribute_mapped_collection('provider'), cascade='all, delete-orphan'))
 
 
+# new user registered
 @staticmethod
 def newest():
   recent = datetime.now(tz=tz.tzlocal()) - timedelta(hours=720) # 720 = 1 month
   return User.query.filter(User.join_date >= recent).order_by(User.join_date.desc()).all()
+
+# new article bookmark
+@staticmethod
+def article_newest():
+  recent = datetime.now(tz=tz.tzlocal()) - timedelta(hours=720)
+  return Bookmark.query.filter(Bookmark.timestamp >= recent).order_by(Bookmark.timestamp.desc()).all()
+
 
 class AnonymousUser(AnonymousUserMixin):
   def can(self, permissions):

@@ -12,7 +12,8 @@
             </button>
             <!-- Brand -->
             <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
-                <img src="https://preview.webpixels.io/web/img/logos/clever-primary.svg" alt="...">
+                <!-- <img src="https://preview.webpixels.io/web/img/logos/clever-primary.svg" alt="..."> -->
+                <img src="{{ url_for('static', filename='img/Pajarito-Pirate.svg') }}" alt="..."><span class="h3"> DemoGregator</span>
             </a>
 
             <!-- Collapse -->
@@ -105,7 +106,7 @@
                                 </div>
                                 <div class="mt-2 mb-0 text-sm">
                                     <span class="badge badge-pill bg-soft-success text-success me-2">
-                                        <i class="bi bi-plus me-1"></i>2
+                                        <i class="bi bi-plus me-1"></i>{{ article_newest | length }}
                                     </span>
                                     <span class="text-nowrap text-xs text-muted">Since last month</span>
                                 </div>
@@ -158,14 +159,8 @@
                                         {{user.bookmarks.all() | length}}
                                     </td>
                                     <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            
-                                            {% if user == current_user %}
-                                            <i class="bg-success"></i>Online
-
-                                            {% else %}
+                                        <span class="badge badge-lg badge-dot">                                   
                                             <i class="bg-danger"></i>{{ moment(user.last_seen).fromNow() }}
-                                            {% endif %}
                                         </span>
                                     </td>
                                     <td class="text-end">

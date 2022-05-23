@@ -25,9 +25,10 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle me-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img class="avatar" src="{{ current_user.avatar(25) }}" alt=""></a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('auth.password_cofirm_email_changes') }}">Change Email</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('auth.password_updates') }}">Change Password</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('auth.merge') }}">Merge Account</a></li>
+            <!-- <li><a class="dropdown-item" href="{{ url_for('auth.password_cofirm_email_changes') }}">Change Email</a></li> -->
+            <!-- <li><a class="dropdown-item" href="{{ url_for('auth.password_updates') }}">Change Password</a></li> -->
+            <!-- <li><a class="dropdown-item" href="{{ url_for('auth.merge') }}">Merge Account</a></li> -->
+            <li><a class="dropdown-item" href="#Username">Hello {{ current_user.username | capitalize }}</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
