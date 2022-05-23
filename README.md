@@ -1,31 +1,33 @@
-# content-aggregator
 
-## link
+# Demogregator
 
-### Programming
-
- - "https://www.geeksforgeeks.org/feed/"
- - "https://css-tricks.com/feed/"
- - "https://scand.com/company/blog/feed/"
- - "https://www.codingdojo.com/blog/feed"
- - "https://www.tutsplanet.com/feed/"
- - "https://github.blog/feed/"
- - "https://blog.jooq.org/feed/"
-
-### OpenSource
-
- - "https://www.cyberciti.biz/feed/"
- - "https://itsfoss.com/feed/"
- - "https://linuxhint.com/feed/"
- - "https://ostechnix.com/feed/"
- - "https://www.fosslinux.com/feed"
- - "https://www.linuxtechi.com/feed/"
- - "https://www.linuxandubuntu.com/",
- - "https://linuxways.net/feed/"
- - "https://www.linuxtoday.com/feed/"
- - "http://feeds.feedburner.com/Linuxbuz"
- - "https://linuxstans.com/feed/"
- - "https://linoxide.com/feed/"
+Demogregator adalah sebuah content aggregator yang berisikan article dari berbagai website seperti github blog, geeksforgeeks, its foss etc..
 
 
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/superiorkid/content-aggregator.git
+```
+
+Go to the project directory
+
+```bash
+  cd content-aggregator
+```
+
+Install dependencies
+
+```bash
+  pip install -r requirements.txt
+```
+
+Start the server
+
+```bash
+  flask run
+```
 
