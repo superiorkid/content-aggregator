@@ -25,7 +25,10 @@
 
   {% endif %}
   {% endwith %}
-    {% block content %}{% endblock content %}
+  {% block content %}{% endblock content %}
+  
+  {{ bootstrap.load_js() }}
+
 
 </body>
 </html>

@@ -230,6 +230,11 @@ def delete(id):
   if not user:
     abort(404)
 
+  bookmarks = user.bookmarks.all()
+  
+  for b in bookmarks:
+    db.session.delete(b)
+  
   db.session.delete(user)
   db.session.commit()
   flash('User Deleted Successfully', 'success')
