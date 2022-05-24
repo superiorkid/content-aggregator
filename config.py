@@ -9,7 +9,7 @@ class Config(object):
 
   # database
   # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI') or "postgresql://superiorkid:root@localhost/aggregator"
-  SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', '').replace('postgres://', 'postgresql://') or "postgresql://superiorkid:root@localhost/aggregator"
+  SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', '').replace('postgres://', 'postgresql://') or "postgresql://superiorkid:root@localhost/aggregator"
   SQLALCHEMY_TRACK_MODIFICATIONS = False
 
   # email
