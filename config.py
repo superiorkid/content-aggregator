@@ -22,8 +22,8 @@ class Config(object):
   MAIL_SUPPRESS_SEND = False
 
   IS_ADMIN = 'mohammad.ilhamuddin@gmail.com'
-  ONESPACEPIRATE_MAIL_SUBJECT_PREFIX = '[OneSpacePirate]'
-  ONESPACEPIRATE_MAIL_SENDER = 'OneSpacePirate Admin <noreply@onespacepirate.com>'
+  ONESPACEPIRATE_MAIL_SUBJECT_PREFIX = '[DemoGregator]'
+  ONESPACEPIRATE_MAIL_SENDER = 'DemoGregator Admin <noreply@demogregator.com>'
 
   GITHUB_OAUTH_CLIENT_ID = os.getenv("GITHUB_OAUTH_CLIENT_ID")
   GITHUB_OAUTH_CLIENT_SECRET = os.getenv("GITHUB_OAUTH_CLIENT_SECRET")
