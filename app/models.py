@@ -28,6 +28,7 @@ class User(UserMixin, db.Model):
 
     if self.role is None:
       if self.email == current_app.config['IS_ADMIN']:
+      # if self.email == 'mohammad.ilhamuddin@gmail.com':
         self.role = Role.query.filter_by(permissions=0xff).first()
       if self.role is None:
         self.role = Role.query.filter_by(default=True).first()
