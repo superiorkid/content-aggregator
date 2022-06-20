@@ -80,23 +80,23 @@ def codingdojo():
   return render_template('per_sites.html', title="CodingDojo latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
-@feed.get('/programming/github')
-def github():
-  """
-    geek for geeks section
-  """
-  blog = BlogFeeds()
-  url = blog.programming.get('github')
+# @feed.get('/programming/github')
+# def github():
+#   """
+#     geek for geeks section
+#   """
+#   blog = BlogFeeds()
+#   url = blog.programming.get('github')
 
-  articles = blog.individual_blog(url)
-  programming_articles = blog.programming_section()
-  opensource_articles = blog.opensource_section()
+#   articles = blog.individual_blog(url)
+#   programming_articles = blog.programming_section()
+#   opensource_articles = blog.opensource_section()
 
-  if current_user.is_authenticated:
-    bookmarks = current_user.bookmarks.all()
-    return render_template('per_sites.html', title="Github Blog latest", data=articles, programming=programming_articles, opensource=opensource_articles, bookmarks=bookmarks)
+#   if current_user.is_authenticated:
+#     bookmarks = current_user.bookmarks.all()
+#     return render_template('per_sites.html', title="Github Blog latest", data=articles, programming=programming_articles, opensource=opensource_articles, bookmarks=bookmarks)
 
-  return render_template('per_sites.html', title="Github Blog latest", data=articles, programming=programming_articles, opensource=opensource_articles)
+#   return render_template('per_sites.html', title="Github Blog latest", data=articles, programming=programming_articles, opensource=opensource_articles)
 
 
 @feed.get('/programming/linuxhint')

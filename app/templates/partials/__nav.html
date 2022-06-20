@@ -1,18 +1,18 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
   <div class="container">
-    <a class="navbar-brand brand" href="#">DemoGregator</a>
+    <a class="navbar-brand brand" href="#">FakeGregator</a>
     <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        {% if current_user.is_authenticated %}
+        {% if current_user.is_authenticated and current_user.confirmed %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('bookmark.bookmark_item') }}">Bookmark
           </a>
         </li>
-        {% if current_user.is_administrator() and current_user.confirmed %}
+        {% if current_user.is_administrator() %}
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{{ url_for('admin.dashboard') }}">Admin</a>
         </li>
@@ -54,7 +54,7 @@
   <nav class="nav nav-underline container" aria-label="Secondary navigation">
     <a class="nav-link active" href="{{ url_for('main.index') }}">Dashboard</a>
    <a class="nav-link" href="{{ url_for('feed.codingdojo') }}">CodingDojo</a>
-   <a class="nav-link" href="{{ url_for('feed.github') }}">GitHub Blog</a>
+   {# <a class="nav-link" href="{{ url_for('feed.github') }}">GitHub Blog</a> #}
    {#   <a class="nav-link" href="{{ url_for('feed.linuxhint') }}">LinuxHint</a> #}
    <a class="nav-link" href="{{ url_for('feed.fosslinux') }}">FOSSlinux</a>
    <a class="nav-link" href="{{ url_for('feed.itsfoss') }}">I'ts FOSS</a>

@@ -9,7 +9,7 @@ class BlogFeeds(object):
   def __init__(self):
     self.__programming = {
       "codingdojo": "https://www.codingdojo.com/blog/feed",
-      "github": "https://github.blog/feed/"
+      # "github": "https://github.blog/feed/"
     }
     self.__opensource = {
       "fosslinux": "https://www.fosslinux.com/feed",

@@ -13,13 +13,21 @@ class Config(object):
   SQLALCHEMY_TRACK_MODIFICATIONS = False
 
   # email
-  MAIL_SERVER = 'smtp.elasticemail.com'
-  MAIL_PORT = 2525
-  MAIL_USE_TLS = True
-  MAIL_USE_SSL = False
-  MAIL_USERNAME = 'mohammad.ilhamuddin@gmail.com'
-  MAIL_PASSWORD = '8CBE09730BD70E38A7DF1A49E67322BC28C9'
-  MAIL_SUPPRESS_SEND = False
+  MAIL_SERVER ='smtp.gmail.com'
+  MAIL_PORT = 465
+  MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+  MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+  MAIL_USE_TLS = False
+  MAIL_USE_SSL = True
+
+
+  # MAIL_SERVER = 'smtp.elasticemail.com'
+  # MAIL_PORT = 2525
+  # MAIL_USE_TLS = True
+  # MAIL_USE_SSL = False
+  # MAIL_USERNAME = 'mohammad.ilhamuddin@gmail.com'
+  # MAIL_PASSWORD = '8CBE09730BD70E38A7DF1A49E67322BC28C9'
+  # MAIL_SUPPRESS_SEND = False
 
   IS_ADMIN = os.getenv("IS_ADMIN")
   ONESPACEPIRATE_MAIL_SUBJECT_PREFIX = '[FakeGregator]'

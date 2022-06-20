@@ -1,18 +1,26 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <h1>Dear {{ user.username }}!</h1>
 
-{% block content %}
+    <h3>Welcome to DemoGregator</h3>
 
-<h1>Dear {{ user.username }}!</h1>
+    <p>
+      To confirm your account please click on the following link:
+      <button>
+        <a
+          style="text-decoration: none"
+          href="{{ url_for('auth.confirm', token=token, _external=True) }}"
+          >Confirm</a
+        >
+      </button>
+    </p>
 
-<h3>Welcome to OneSpacePirate</h3>
+    <p>Sincerely,</p>
+    <br />
 
-<p>To confirm your account please click on the following link:
-<a href="{{ url_for('auth.confirm', token=token, _external=True) }}">{{ url_for('auth.confirm', token=token, _external=True) }}</a></p>
+    <p>The DemoGregator Team</p>
 
-<p>Sincerely,</p><br>
-
-<p>The OneSpacePirate Team</p>
-
-<p>Note: replies to this email address are not monitored.</p>
-
-{% endblock content %}
+    <p>Note: replies to this email address are not monitored.</p>
+  </body>
+</html>

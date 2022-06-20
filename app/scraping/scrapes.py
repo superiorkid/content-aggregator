@@ -37,34 +37,34 @@ class WebScrape:
     # unwanted.replaceWith('')
     return temp
 
-  def github_blog(self, url):
-    self.url = url
+  # def github_blog(self, url):
+  #   self.url = url
 
-    res = requests.get(self.url)
-    soup = BeautifulSoup(res.content, 'html.parser')
+  #   res = requests.get(self.url)
+  #   soup = BeautifulSoup(res.content, 'html.parser')
 
-    body = soup.find(class_="post__content")
+  #   body = soup.find(class_="post__content")
 
-    temp = {
-      "title": soup.find('h1').get_text(),
-      "body": body
-    }
+  #   temp = {
+  #     "title": soup.find('h1').get_text(),
+  #     "body": body
+  #   }
 
-    soup.find(class_="post__content")['class'].remove('col-lg-7')
-    soup.find(class_="post__content")['class'].remove('col-md-8')
+  #   soup.find(class_="post__content")['class'].remove('col-lg-7')
+  #   soup.find(class_="post__content")['class'].remove('col-md-8')
 
-    # remove inline style
-    for tag in soup():
-      for attr in ['style', 'name']:
-        del tag[attr]
+  #   # remove inline style
+  #   for tag in soup():
+  #     for attr in ['style', 'name']:
+  #       del tag[attr]
 
-    unwanted = body.find('div', class_="post-tags")
-    unwanted.replaceWith()
+  #   unwanted = body.find('div', class_="post-tags")
+  #   unwanted.replaceWith()
 
-    for i in body.find_all('img'):
-      del i["srcset"]
+  #   for i in body.find_all('img'):
+  #     del i["srcset"]
 
-    return temp
+  #   return temp
 
   def codingdojo(self, url):
     self.url = url
