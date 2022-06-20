@@ -30,8 +30,8 @@ class Config(object):
   # MAIL_SUPPRESS_SEND = False
 
   IS_ADMIN = os.getenv("IS_ADMIN")
-  ONESPACEPIRATE_MAIL_SUBJECT_PREFIX = '[FakeGregator]'
-  ONESPACEPIRATE_MAIL_SENDER = 'FakeGregator Admin <noreply@fakegregator.com>'
+  ONESPACEPIRATE_MAIL_SUBJECT_PREFIX = '[DemoGregator]'
+  ONESPACEPIRATE_MAIL_SENDER = 'FakeGregator Admin <noreply@demogregator.com>'
 
   GITHUB_OAUTH_CLIENT_ID = os.getenv("GITHUB_OAUTH_CLIENT_ID")
   GITHUB_OAUTH_CLIENT_SECRET = os.getenv("GITHUB_OAUTH_CLIENT_SECRET")
