@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn wsgi:app --preload
+web: flask db upgrade; gunicorn wsgi:app --preload 
