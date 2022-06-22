@@ -39,9 +39,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 </p>
    
 <h4>
-    <a href="https://github.com/superiorkid/content-aggregator/">View Demo</a>
-  <span> · </span>
-    <a href="https://github.com/superiorkid/content-aggregator">Documentation</a>
+    <a href="https://demogregator.herokuapp.com/">View Demo</a>
   <span> · </span>
     <a href="https://github.com/superiorkid/content-aggregator/issues/">Report Bug</a>
   </h4>
@@ -71,7 +69,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 ### :camera: Screenshots
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+  <img src="app/static/img/demo.png" alt="screenshot" />
 </div>
 
 <!-- TechStack -->
